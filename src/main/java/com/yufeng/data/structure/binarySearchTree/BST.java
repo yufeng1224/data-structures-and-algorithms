@@ -1,0 +1,615 @@
+package com.yufeng.data.structure.binarySearchTree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ * 描述:
+ *      二分搜索树自定义实现
+ *          1. E 必须要有可比性, 需要继承 Comparable 接口
+ * @author yufeng
+ * @create 2019-07-20
+ */
+public class BST<E extends Comparable<E>> {
+
+    // 定义内部节点类 Node
+    private class Node {
+
+        public E e;
+
+        public Node left;
+
+        public Node right;
+
+        public Node(E e) {
+            this.e = e;
+            left = null;
+            right = null;
+        }
+    }
+
+    private Node root;          // 根节点成员变量
+
+    private int size;           // 维护树中的元素实际大小
+
+    public BST() {
+        root = null;
+        size = 0;
+    }
+
+    /**
+     * 判断二分搜索树是否为空
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+
+    /**
+     * 获得二分搜索树元素的个数
+     * @return
+     */
+    public int getSize() {
+        return size;
+    }
+
+
+    /**
+     * 向二分搜索树中添加新的元素e
+     */
+    public void add(E e) {
+        if (root == null) {             // root初始为null的情况
+            root = new Node(e);
+            size ++;
+        } else {
+            add(root, e);
+        }
+    }
+
+
+    /**
+     * 向以node为根的二分搜索树中插入元素E(使用递归)
+     */
+    private void add(Node node, E e) {
+
+        // 递归终止条件定义(这里的终止条件是非常臃肿的)
+        if (e.equals(node.e)) {
+            return;
+        } else if (e.compareTo(node.e) < 0 && node.left == null) {
+            node.left = new Node(e);
+            size ++;
+            return;
+        } else if (e.compareTo(node.e) > 0 && node.right == null) {
+            node.right = new Node(e);
+            size ++;
+            return;
+        }
+
+        if (e.compareTo(node.e) < 0) {
+            add(node.left, e);
+        } else {                        // e.compareTo(node.e) > 0
+            add(node.right, e);
+        }
+    }
+
+
+    /**
+     * 向二分搜索树中添加新的元素e (对上面的add()方法进行优化)
+     */
+    public void addNode(E e) {
+        root = addNode(root, e);
+    }
+
+
+    /**
+     * 优化后的插入元素方式(递归算法), 并返回插入新节点后二分搜索树的根
+     * 根据上面添加元素的逻辑:
+     *    1. 宏观上来看: 无论是插入到左子树或者右子树, 只要递归到最后一层，放入的条件都是当前node == null;
+     *    2. 从操作上来看, 每次比较都要确定插入是在当前结点的左边还是右边;
+     *    3. 所以需要将插入的 node 挂接到它父亲节点的左子树或者右子树即可!
+     */
+    private Node addNode(Node node, E e) {
+
+        // 优化后的递归终止条件, 如果node==null的话, 肯定是要创建一个新的节点
+        if (node == null) {
+            size ++;
+            return new Node(e);
+        }
+
+        // 比较、插入以及挂接操作
+        if (e.compareTo(node.e) < 0) {
+            node.left = addNode(node.left, e);
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = addNode(node.right, e);
+        }
+
+        return node;
+    }
+
+
+    /**
+     * 查看二分搜索树中是否包含元素e(递归实现)
+     */
+    public boolean contains(E e) {
+        return contains(root, e);
+    }
+
+
+    /**
+     * 看以node为根的二分搜索树中是否包含元素e(递归实现)
+     */
+    private boolean contains(Node node, E e) {
+        // 递归终止条件一
+        if (node == null) {
+            return false;
+        }
+
+        // 递归终止条件二
+        if (e.compareTo(node.e) == 0) {
+            return true;
+        } else if (e.compareTo(node.e) < 0) {           // 如果e比当前节点小, 则遍历当前节点的左子树;
+            return contains(node.left, e);
+        } else {    // e.compareTo(node.e) > 0的情况     // 如果e比当前节点大, 则遍历当前节点的右子树;
+            return contains(node.right, e);
+        }
+    }
+
+
+    /**
+     * 查看二分搜索树是否包含元素e(非递归实现)
+     */
+    public boolean containsNR(E e) {
+        return containsNR(root, e);
+    }
+
+
+    /**
+     * 非递归while循环实现
+     */
+    private boolean containsNR(Node node, E e) {
+        while (node != null) {
+            if (node.e == e) {
+                return true;
+            }
+            if (node.e.compareTo(e) > 0) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 二分搜索树的前序遍历
+     */
+    public void preOrder() {
+        preOrder(root);
+    }
+
+
+    /**
+     * 前序遍历以node为根的二分搜索树, 递归算法
+     */
+    private void preOrder(Node node) {
+
+        if (node == null) {         // 递归终止条件
+            return;
+        }
+        System.out.print(node.e + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+
+        // 更加精简的写法: 当大家熟练地掌握了递归的时候, 可以不用先写递归终止的条件, 再写递归组成的逻辑。
+        // 当然, 良好的习惯还是要写下递归。 这样思路会比较清晰
+//        if (node != null) {
+//            System.out.println(node.e);
+//            preOrder(node.left);
+//            preOrder(node.right);
+//        }
+    }
+
+
+    /**
+     * 二分搜索树的非递归前序遍历(深度优先遍历), 需要使用到辅助数据结构'栈'来实现
+     */
+    public void preOrderNR() {
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            Node cur = stack.pop();
+            System.out.print(cur.e + " ");
+
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+    }
+
+
+    /**
+     * 二分搜索树的中序遍历
+     */
+    public void inOrder() {
+        inOrder(root);
+    }
+
+
+    /**
+     * 中序遍历以node为根的二分搜索树, 递归算法
+     */
+    private void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        System.out.print(node.e + " ");
+        inOrder(node.right);
+    }
+
+
+    /**
+     * 二分搜索树的后序遍历
+     */
+    public void postOrder() {
+        postOrder(root);
+    }
+
+
+    /**
+     * 后序遍历以node为根的二分搜索树, 递归算法
+     */
+    private void postOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.e + " ");
+    }
+
+
+    /**
+     * 二分搜索树的层序遍历, 也称为广度优先遍历
+     * (从根节点开始，排着队的进入队列)
+     */
+    public void levelOrder() {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node cur = queue.remove();
+            System.out.print(cur.e + " ");
+
+            if (cur.left != null) {
+                queue.add(cur.left);
+            }
+            if (cur.right != null) {
+                queue.add(cur.right);
+            }
+        }
+    }
+
+
+    /**
+     * 二分搜索树的中序遍历(非递归实现), 需要使用到辅助数据结构 栈 来实现
+     */
+    public void inOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+
+        // 循环终止要满足两种情况, node == null && 栈也空了!
+        while (node != null || !stack.empty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            node = stack.pop();
+            System.out.print(node.e + " ");
+            node = node.right;
+        }
+    }
+
+
+    /**
+     * 二分搜索树的后序遍历(非递归实现), 需要使用到辅助数据结构 栈 来实现
+     */
+    public void postOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+        Node pre = null;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            Node sNode = stack.peek();
+            if (sNode.right == null || pre == sNode.right) {
+                stack.pop();
+                pre = sNode;
+                System.out.print(sNode.e + " ");
+            } else {
+                node = sNode.right;
+            }
+        }
+    }
+
+
+    /**
+     * 寻找二分搜索树的最小元素
+     */
+    public E minimum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return minimum(root).e;
+    }
+
+
+    /**
+     * 返回以node为根的二分搜索树的最小值所在的节点(一直向左, 最左端的元素, 跟操作一个单向链表没区别)
+     */
+    private Node minimum(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+
+    /**
+     * 寻找二分搜索树的最小元素(非递归实现)
+     */
+    public E minimumNR() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return minimumNR(root).e;
+    }
+
+
+    /**
+     * 返回以node为根的二分搜索树的最小值所在的节点(非递归写法)
+     */
+    private Node minimumNR(Node node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+
+    /**
+     * 寻找二分搜索树的最大元素
+     */
+    public E maximum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return maximum(root).e;
+    }
+
+
+    /**
+     * 返回以 node 为根的二分搜索树的最大值所在的节点
+     */
+    private Node maximum(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+
+    /**
+     * 从二分搜索树中删除最小值所在节点, 并返回节点的值
+     */
+    public E removeMin() {
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+
+    /**
+     * 删除掉以node为根的二分搜索树中的最小节点
+     */
+    private Node removeMin(Node node) {
+        // 递归终止条件
+        if (node.left == null) {
+            Node rightNode = node.right;        // 当没有右子树时, rightNode=null
+            node.right = null;
+            size --;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);       // 节点进行重新连接, 将前面的rightNode 连接到这里的 node.left
+        return node;
+    }
+
+
+    /**
+     * 从二分搜索树中删除最大值所在的节点, 并返回节点的值
+     */
+    public E removeMax() {
+        E ret = maximum();
+        root = removeMax(root);
+        return ret;
+    }
+
+
+    /**
+     * 删除掉以node 为根的二分搜索树中的最大节点
+     * 返回删除节点后的二分搜索树的根
+     */
+    private Node removeMax(Node node) {
+        if (node.right == null) {
+            Node leftNode = node.left;
+            node.left = null;
+            size --;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);     // 这里重新进行了赋值操作(节点重新连接)
+        return node;
+    }
+
+
+    /**
+     * 从二分搜索树中删除元素为e的节点
+     */
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+
+    /**
+     * 删除以node为根的二分搜索树中值为e的节点, 并返回删除节点后新的二分搜索树
+     */
+    private Node remove(Node node , E e) {
+        if (node == null) {
+            return null;
+        }
+
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {            // e == node.e
+
+            if (node.left == null) {                 // 待删除节点左子树为空的情况, 保存一下右子树, 将node与当前节点断开, 返回它的右子树
+                Node rightNode = node.right;
+                node.right = null;
+                size -- ;
+                return rightNode;
+            } else if (node.right == null) {        // 待删除节点右子树为空的情况
+                Node leftNode = node.left;
+                node.left = null;
+                size -- ;
+                return leftNode;
+            }
+
+            // 以上两种情况都是子节点不满的情况!
+
+            // 待删除节点左右子树均不为空的情况
+            // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
+            // 用这个节点替代删除节点的位置
+            Node successor = minimum(node.right);           // 先找到当前节点右子树中的最小节点，后继节点
+            successor.right = removeMin(node.right);        // (断连以及重新挂接操作)将当前节点右子树的所有节点挂接到这个后继节点上， 并去除原先模型中自己的那个节点
+            successor.left = node.left;                     // 将当前节点左子树的所有节点挂接到这个后继节点
+
+            node.left = node.right = null;                  // 将原来的节点失效  help GC
+            return successor;                               // 返回重新组装过的二分搜索树子集
+        }
+    }
+
+
+    /**
+     * 计算树的深度
+     */
+    public int maxDepth() {
+        return maxDepth(root);
+    }
+
+
+    /**
+     * 计算树的深度————递归实现(深度优先遍历)
+     */
+    private int maxDepth(Node node) {
+        // 递归终止条件
+        if (node == null) {
+            return 0;
+        }
+
+        int leftDepth = maxDepth(node.left);                    // 计算当前节点左子树的深度
+        int rightDepth = maxDepth(node.right);                  // 计算当前节点右子树的深度
+        int maxDepth = Math.max(leftDepth, rightDepth) + 1;     // 计算当前节点的最大深度
+
+        return maxDepth;
+
+        // 以上的代码思路比较清晰, 当然也可以精简成以下的代码
+//        if (node == null) {
+//            return 0;
+//        }
+//        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
+    }
+
+
+    /**
+     * 计算树的深度: 层序遍历 (广度优先搜索) 通过队列实现
+     * 每遍历一层, 则计数器+1， 直到遍历完成, 则可得到树的深度
+     */
+    public int maxDepthLevelOrder() {
+        if (root == null) {
+            return 0;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        int level = 0;                          // 层数(也就是深度)
+
+        while (!queue.isEmpty()) {
+            level ++;                           // 层数先加1
+            int size = queue.size();            // 队列中的元素
+            for (int i = 0; i < size; i ++) {
+                Node node = queue.remove();     // 将上一层的元素依次出队 (删除队首元素)
+
+                if (node.left != null) {
+                    queue.add(node.left);       // 将当前节点的左叶子节点插入队尾
+                }
+                if (node.right != null) {
+                    queue.add(node.right);      // 将当前节点的右叶子节点插入队尾
+                }
+            }
+        }
+        return level;
+    }
+
+
+    /**
+     * 基于前序遍历的字符串输出
+     */
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        generateBSTString(root, 0, res);
+        return res.toString();
+    }
+
+
+    /**
+     * 生成以node为根节点, 深度为depth的描述二叉树的字符串
+     */
+    private void generateBSTString(Node node, int depth, StringBuilder res) {
+        if (node == null) {
+            res.append(generateDepthString(depth) + "null\n");
+            return;
+        }
+        res.append(generateDepthString(depth) + node.e + "\n");
+
+        generateBSTString(node.left, depth + 1, res);
+        generateBSTString(node.right, depth + 1, res);
+    }
+
+
+    /**
+     * 这里是根据深度来打印输出 --
+     */
+    private String generateDepthString(int depth) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < depth; i ++) {
+            res.append("--");
+        }
+        return res.toString();
+    }
+}
