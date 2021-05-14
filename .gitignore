@@ -9,5 +9,5 @@ target/
 #忽略当前文件
 /data-structures-and-algorithms.iml
 
-#忽略当前文档
+#忽略.idea文档
 .idea/
