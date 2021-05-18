@@ -102,12 +102,7 @@ public class Array<E> {
 
 
     /**
-     * 在第index个位置插入一个元素e, 实现步骤:
-     *    1. 容量检查;
-     *    2. 扩容操作(原来容量的2倍);
-     *    3. [index, size) 位置元素统一向后滑动;
-     *    4. index 位置插入新元素;
-     *    5. 数组元素size 再+1;
+     * 在第index个位置插元素e
      */
     public void add(int index, E e) {
 
@@ -116,11 +111,6 @@ public class Array<E> {
             throw new IllegalArgumentException("Add failed. Require index >= 0 and index <= size");
         }
 
-        /** 数组扩容: ArrayList扩容多少?
-         *      1. jdk 中 ArrayList 最小的capacity 是10。
-         *      2. jdk 中 ArrayList 每次扩容为原来容量的 1.5倍, 使用的是位移操作。
-         *         (比如原来的 capacity=499, 扩容之后变为748。 新增了249个容量)
-         * */
         if (size == data.length) {
             resize( data.length << 2);
         }
@@ -198,14 +188,10 @@ public class Array<E> {
 
     /**
      * 查找数组中是否存在元素e, 如果有多个, 全部返回(索引位置)
-     *    1. 第一次遍历: 统计元素e出现的次数;
-     *    2. 创建一个固定数组, 用来存放e出现的index所以位置;
-     *    3. 第二次遍历: 将 index索引位置存入数组中并返回;
-     *
-     * 循环了两遍, 时间复杂度: 2 * O(n)
      */
     public int[] findAll(E e) {
-        int number = 0;
+
+        int number = 0;                                 // 统计元素e出现的次数
         for (int index = 0; index < size; index ++) {
             if (data[index] == e) {
                 number ++;
@@ -216,7 +202,7 @@ public class Array<E> {
             return null;
         }
 
-        int[] indexArr = new int[number];
+        int[] indexArr = new int[number];                // 将index索引位置存入数组并返回
         number = 0;
         for (int index = 0; index < size; index ++) {
             if (data[index] == e) {
@@ -230,18 +216,11 @@ public class Array<E> {
 
 
     /**
-     * 方法说明: 从数组删除指定index位置的元素，并返回删除的元素。实现步骤:
-     *    1. index合法性检查;
-     *    2. 获取index位置元素, 用于返回;
-     *    3. 将[index, size)位置的元素统一向前滑动;
-     *    4. 数组元素大小 size - 1;
-     *    5. 将最后一位 data[size - 1] 赋值为 null;
-     *    6. 缩容操作; (此处设计需要防止复杂度震荡)
-     *    7. 将删除元素的值返回;
+     * 从数组删除指定index位置的元素，并返回删除的元素
      */
     public E remove(int index) {
 
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= size) {                       // index合法性检查
             throw new IllegalArgumentException("delete failed. Index is illegal. ");
         }
         E ret = data[index];
@@ -249,7 +228,7 @@ public class Array<E> {
             data[i-1] = data[i];
         }
         size --;
-        data[size] = null;          //loitering objects != memory leak
+        data[size] = null;          //loitering objects != memory leak   help GC
 
         /** data[size-1] = null; size -- */
 
