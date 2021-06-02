@@ -57,5 +57,25 @@ public class Scoreboard {
     }
 
 
+    public static void main(String[] args) {
+
+        GameEntry gameEntry01 = new GameEntry("Mike", 1105);
+        GameEntry gameEntry02 = new GameEntry("Rob", 750);
+        GameEntry gameEntry03 = new GameEntry("Mike", 720);
+        GameEntry gameEntry04 = new GameEntry("Mike", 660);
+        GameEntry gameEntry05 = new GameEntry("Mike", 590);
+        GameEntry gameEntry06 = new GameEntry("Mike", 510);
+
+        Scoreboard scoreboard = new Scoreboard(10);
+        scoreboard.add(gameEntry01);
+        scoreboard.add(gameEntry02);
+        scoreboard.add(gameEntry03);
+        scoreboard.add(gameEntry04);
+        scoreboard.add(gameEntry05);
+        scoreboard.add(gameEntry06);
+
+        GameEntry gameEntry07 = new GameEntry("Jill", 740);
+        scoreboard.add(gameEntry07);
+    }
 
 }
