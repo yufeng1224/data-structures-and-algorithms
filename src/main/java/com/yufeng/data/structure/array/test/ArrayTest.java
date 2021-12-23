@@ -15,7 +15,6 @@ public class ArrayTest {
         arrayTest02();
     }
 
-
     /**
      * arrayTest01
      */
@@ -41,7 +40,6 @@ public class ArrayTest {
         array.removeFirst();
         System.out.println(array);
     }
-
 
     /**
      * arrayTest02

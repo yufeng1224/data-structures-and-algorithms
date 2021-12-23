@@ -16,7 +16,6 @@ public class Scoreboard {
         board = new GameEntry[capacity];
     }
 
-
     /**
      * Attempt to add a new score to the collection(if it is high enough)
      */
@@ -36,7 +35,6 @@ public class Scoreboard {
             board[j] = e;                               // when done, add new entry
         }
     }
-
 
     /**
      * Remove and return high score at index i
@@ -58,7 +56,6 @@ public class Scoreboard {
 
 
     public static void main(String[] args) {
-
         GameEntry gameEntry01 = new GameEntry("Mike", 1105);
         GameEntry gameEntry02 = new GameEntry("Rob", 750);
         GameEntry gameEntry03 = new GameEntry("Mike", 720);
