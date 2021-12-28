@@ -1,6 +1,5 @@
-package com.yufeng.data.structure.array.test;
+package com.yufeng.data.structure.array;
 
-import com.yufeng.data.structure.array.Array;
 
 /**
  * 描述:

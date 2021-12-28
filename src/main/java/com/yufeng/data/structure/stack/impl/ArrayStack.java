@@ -10,22 +10,19 @@ import com.yufeng.data.structure.stack.IStack;
  *         1. 将数组看成竖着存放的, 最上面是数组的尾部;
  *         2. 利用到了数组addLast()的操作, 均摊时间复杂度为O(1)这一特性;
  * @author yufeng
- * @create 2019-07-08
+ * @create 2019-07-04
  */
 public class ArrayStack<E> implements IStack<E> {
 
     Array<E> array;
 
-
     public ArrayStack() {
         array = new Array<>();
     }
 
-
     public ArrayStack(int capacity) {
         array = new Array<>(capacity);
     }
-
 
     /**
      * 返回栈中维护元素的数量
@@ -35,7 +32,6 @@ public class ArrayStack<E> implements IStack<E> {
         return array.getSize();
     }
 
-
     /**
      * 判断栈是否为空
      */
@@ -44,14 +40,12 @@ public class ArrayStack<E> implements IStack<E> {
         return array.isEmpty();
     }
 
-
     /**
      * 返回栈的容量大小
      */
     public int getCapacity() {
         return array.getCapacity();
     }
-
 
     /**
      * 入栈 ———— 均摊时间复杂度: O(1)
@@ -61,7 +55,6 @@ public class ArrayStack<E> implements IStack<E> {
         array.addLast(e);
     }
 
-
     /**
      * 出栈 ———— 均摊时间复杂度: O(1)
      */
@@ -70,7 +63,6 @@ public class ArrayStack<E> implements IStack<E> {
         return array.removeLast();
     }
 
-
     /**
      * 查看栈顶元素 ———— 时间复杂度: O(1)
      */
@@ -78,7 +70,6 @@ public class ArrayStack<E> implements IStack<E> {
     public E peek() {
         return array.getLast();
     }
-
 
     @Override
     public String toString() {
@@ -94,7 +85,6 @@ public class ArrayStack<E> implements IStack<E> {
         res.append("] top");
         return res.toString();
     }
-
 
     /**
      * jdk 中的写法

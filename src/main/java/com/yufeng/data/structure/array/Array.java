@@ -94,6 +94,7 @@ public class Array<E> {
         }
 
         for (int i = size - 1; i >= index; i --) {
+            data[i+1] = data[i];
         }
         data[index] = e;
         size ++;
@@ -127,7 +128,7 @@ public class Array<E> {
     /**
      * 设置指定index位置的元素
      */
-    public void set(int index , E e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed. Index is illegal. ");
         }
@@ -147,7 +148,7 @@ public class Array<E> {
     }
 
     /**
-     * 查找数组中元素e所在的索引位置，如果不存在元素e，则返回-1
+     * 查找数组中元素e所在的索引位置, 如果不存在元素e, 则返回-1
      */
     public int find(E e) {
         for (int index = 0; index < size; index ++) {
@@ -185,21 +186,21 @@ public class Array<E> {
     }
 
     /**
-     * 从数组中删除第一个元素，返回删除的元素
+     * 从数组中删除第一个元素, 并返回删除的元素
      */
     public E removeFirst() {
         return remove(0);
     }
 
     /**
-     * 从数组中删除最后一个元素，返回删除的元素
+     * 从数组中删除最后一个元素, 并返回删除的元素
      */
     public E removeLast() {
         return remove(size - 1);
     }
 
     /**
-     * 从数组删除指定index位置的元素，并返回删除的元素
+     * 从数组删除指定index位置的元素, 并返回删除的元素
      */
     public E remove(int index) {
         if (index < 0 || index >= size) {

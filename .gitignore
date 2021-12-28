@@ -11,9 +11,10 @@ target/
 
 #忽略.idea文档
 .idea/
-/src/main/java/com/yufeng/data/structure/array/数组小结
+/com/yufeng/data/structure/array/单元小结
 /数据结构概览
 .DS_Store
 src/main/resources/
 src/test/
 /src/main/java/数据结构概览
+单元小结
