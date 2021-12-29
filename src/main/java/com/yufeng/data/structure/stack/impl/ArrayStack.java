@@ -3,9 +3,8 @@ package com.yufeng.data.structure.stack.impl;
 import com.yufeng.data.structure.array.Array;
 import com.yufeng.data.structure.stack.Stack;
 
-
 /**
- * 描述:
+ * @description
  *      1. 底层基于动态数组实现的栈
  *      2. 栈顶对应的是数组尾部, 利用到了数组addLast()操作的均摊时间复杂度为O(1)这一特性
  * @author yufeng
@@ -24,7 +23,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * 返回栈中维护元素的数量
+     * 返回栈中元素的数量
      */
     @Override
     public int getSize() {

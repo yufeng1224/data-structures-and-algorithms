@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.queue;
 
 /**
- * 描述:
+ * @description
  *      自定义队列接口
  * @author yufeng
  * @create 2019-07-15

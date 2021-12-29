@@ -7,7 +7,7 @@ import com.yufeng.data.structure.stack.impl.LinkedListStack;
 import java.util.Random;
 
 /**
- * 描述:
+ * @description
  *      数组栈和链表栈的性能分析比较
  *         1. 数组栈可能会比链表栈慢, 因为 linkedList 会涉及到 new 操作， 10W, 100W, 1000W
  *            时间可能会有区别。

@@ -4,25 +4,26 @@ import com.yufeng.data.structure.array.Array;
 import com.yufeng.data.structure.queue.Queue;
 
 /**
- * 描述:
- *      基于数组实现的自定义队列
+ * @description
+ *      基于数组实现的队列
  * @author yufeng
- * @create 2019-07-15
+ * @create 2019-07-06
  */
 public class ArrayQueue<E> implements Queue<E> {
 
     private Array<E> array;
 
-
     public ArrayQueue(int capacity) {
         array = new Array<>(capacity);
     }
-
 
     public ArrayQueue() {
         array = new Array<>();
     }
 
+    public int getCapacity() {
+        return array.getCapacity();
+    }
 
     /**
      * 查看队列元素个数
@@ -32,7 +33,6 @@ public class ArrayQueue<E> implements Queue<E> {
         return array.getSize();
     }
 
-
     /**
      * 判断队列是否为空
      */
@@ -40,12 +40,6 @@ public class ArrayQueue<E> implements Queue<E> {
     public boolean isEmpty() {
         return array.isEmpty();
     }
-
-
-    public int getCapacity() {
-        return array.getCapacity();
-    }
-
 
     /**
      * 向队列中添加元素(队尾添加元素)
@@ -56,7 +50,6 @@ public class ArrayQueue<E> implements Queue<E> {
         array.addLast(e);
     }
 
-
     /**
      * 队首移出元素
      * 时间复杂度: O(n) (出队效率不高! 超过100万个元素，效率会很低!)
@@ -66,7 +59,6 @@ public class ArrayQueue<E> implements Queue<E> {
         return array.removeFirst();
     }
 
-
     /**
      * 获得队首数据
      */
@@ -74,7 +66,6 @@ public class ArrayQueue<E> implements Queue<E> {
     public E getFront() {
         return array.getFirst();
     }
-
 
     @Override
     public String toString() {

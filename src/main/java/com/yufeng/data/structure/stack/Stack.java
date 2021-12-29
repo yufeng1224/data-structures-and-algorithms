@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.stack;
 
 /**
- * 描述:
+ * @description
  *      自定义栈接口
  * @author yufeng
  * @create 2019-07-04
@@ -12,9 +12,9 @@ public interface Stack<E> {
 
     void push(E e);
 
-    E  pop();
+    E pop();
 
-    E  peek();
+    E peek();
 
     boolean isEmpty();
 
