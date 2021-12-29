@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.array.applications;
 
 /**
- * 描述: Pascal's Triangle(杨辉三角)
+ * @description Pascal's Triangle(杨辉三角)
  * 相关知识和规律:
  *    1. 每一行的第一个数和最后一个数都是1
  *    2. 除了开头和结尾的两个1，其他的数等于上面两个数的和

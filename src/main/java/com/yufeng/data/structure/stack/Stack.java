@@ -6,7 +6,7 @@ package com.yufeng.data.structure.stack;
  * @author yufeng
  * @create 2019-07-04
  */
-public interface IStack<E> {
+public interface Stack<E> {
 
     int getSize();
 

@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.array.applications;
 
 /**
- * 描述:
+ * @description
  *
  * @author yufeng
  * @create 2020-01-20

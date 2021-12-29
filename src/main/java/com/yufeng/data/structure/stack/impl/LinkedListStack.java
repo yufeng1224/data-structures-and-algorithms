@@ -2,7 +2,7 @@ package com.yufeng.data.structure.stack.impl;
 
 
 import com.yufeng.data.structure.linkedList.LinkedList;
-import com.yufeng.data.structure.stack.IStack;
+import com.yufeng.data.structure.stack.Stack;
 
 /**
  * 描述:
@@ -12,7 +12,7 @@ import com.yufeng.data.structure.stack.IStack;
  * @author yufeng
  * @create 2019-07-08
  */
-public class LinkedListStack<E> implements IStack<E> {
+public class LinkedListStack<E> implements Stack<E> {
 
     private LinkedList<E> list;     // 内部维护了一个单向链表
 

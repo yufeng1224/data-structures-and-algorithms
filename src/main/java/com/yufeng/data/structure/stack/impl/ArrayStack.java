@@ -1,18 +1,17 @@
 package com.yufeng.data.structure.stack.impl;
 
 import com.yufeng.data.structure.array.Array;
-import com.yufeng.data.structure.stack.IStack;
+import com.yufeng.data.structure.stack.Stack;
 
 
 /**
  * 描述:
- *      底层基于动态数组实现的栈
- *         1. 将数组看成竖着存放的, 最上面是数组的尾部;
- *         2. 利用到了数组addLast()的操作, 均摊时间复杂度为O(1)这一特性;
+ *      1. 底层基于动态数组实现的栈
+ *      2. 栈顶对应的是数组尾部, 利用到了数组addLast()操作的均摊时间复杂度为O(1)这一特性
  * @author yufeng
  * @create 2019-07-04
  */
-public class ArrayStack<E> implements IStack<E> {
+public class ArrayStack<E> implements Stack<E> {
 
     Array<E> array;
 
@@ -48,7 +47,7 @@ public class ArrayStack<E> implements IStack<E> {
     }
 
     /**
-     * 入栈 ———— 均摊时间复杂度: O(1)
+     * 入栈
      */
     @Override
     public void push(E e) {
@@ -56,7 +55,7 @@ public class ArrayStack<E> implements IStack<E> {
     }
 
     /**
-     * 出栈 ———— 均摊时间复杂度: O(1)
+     * 出栈
      */
     @Override
     public E pop() {
@@ -64,7 +63,7 @@ public class ArrayStack<E> implements IStack<E> {
     }
 
     /**
-     * 查看栈顶元素 ———— 时间复杂度: O(1)
+     * 查看栈顶元素
      */
     @Override
     public E peek() {
@@ -85,25 +84,5 @@ public class ArrayStack<E> implements IStack<E> {
         res.append("] top");
         return res.toString();
     }
-
-    /**
-     * jdk 中的写法
-     * @param args
-     */
-//    @Override
-//    public String toString() {
-//        StringBuilder res = new StringBuilder();
-//        res.append("Stack: ");
-//        res.append('[');
-//
-//        for (int i = 0; ; i++) {
-//            if (i == array.getSize() - 1) {
-//                return res.append(array.get(i)).append("] top").toString();
-//            }
-//            res.append(array.get(i) + ", ");
-//        }
-//
-//       //return res.toString();
-//    }
 
 }

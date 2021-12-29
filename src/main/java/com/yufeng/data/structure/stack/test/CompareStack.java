@@ -1,6 +1,6 @@
 package com.yufeng.data.structure.stack.test;
 
-import com.yufeng.data.structure.stack.IStack;
+import com.yufeng.data.structure.stack.Stack;
 import com.yufeng.data.structure.stack.impl.ArrayStack;
 import com.yufeng.data.structure.stack.impl.LinkedListStack;
 
@@ -35,7 +35,7 @@ import java.util.Random;
 public class CompareStack {
 
     // 测试使用queue 运行 opCount 个 enqueue 和 dequeue 操作所需要的时间, 单位: 秒
-    private static double testStack(IStack<Integer> stack, int opCount) {
+    private static double testStack(Stack<Integer> stack, int opCount) {
 
         long startTime = System.nanoTime();
         Random random = new Random();

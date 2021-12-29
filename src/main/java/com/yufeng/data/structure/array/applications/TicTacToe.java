@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.array.applications;
 
 /**
- * 描述:
+ * @description
  *      Two-Dimensional Arrays and Positional Games
  *      Simulation of a Tic-Tac-Toe game
  * @author yufeng

@@ -2,7 +2,7 @@ package com.yufeng.data.structure.array;
 
 
 /**
- * 描述:
+ * @description
  *     自定义数组测试类
  * @author yufeng
  * @create 2019-07-01
