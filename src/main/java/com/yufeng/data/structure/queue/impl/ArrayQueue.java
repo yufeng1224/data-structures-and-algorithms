@@ -26,7 +26,7 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * 查看队列元素个数
+     * 查看队列中元素个数
      */
     @Override
     public int getSize() {
@@ -42,8 +42,7 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * 向队列中添加元素(队尾添加元素)
-     * 时间复杂度: O(1)  均摊
+     * 入队: 队尾添加元素
      */
     @Override
     public void enqueue(E e) {
@@ -51,8 +50,8 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * 队首移出元素
-     * 时间复杂度: O(n) (出队效率不高! 超过100万个元素，效率会很低!)
+     * 出队: 队首移出元素
+     * 时间复杂度: O(n) (超过100万个元素，效率会很低!)
      */
     @Override
     public E dequeue() {

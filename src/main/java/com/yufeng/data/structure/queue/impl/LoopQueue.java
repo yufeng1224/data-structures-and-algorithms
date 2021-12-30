@@ -3,36 +3,31 @@ package com.yufeng.data.structure.queue.impl;
 import com.yufeng.data.structure.queue.Queue;
 
 /**
- * 描述:
- *     自定义循环队列
- *        1. front: 指向队首下标;
- *        2. tail:  指向队尾下标;
- *        3. front == tail,  队列为空;
- *        4. (tail + 1) % getCapacity() == front, 队列满了;
- *        5. 重点: tail 下标为空，该位置上是没有元素的;
- *        6. 循环队列会有一个空间上的浪费;
+ * @description
+ *     1. 基于数组实现循环队列
+ *     2. 规则定义
+ *        2-1 front: 指向队首
+ *        2-2 tail: 指向队尾
+ *        2-3 front == tail, 队列为空
+ *        2-4 (tail + 1) % getCapacity() == front, 队列满了
+ *        2-5 tail下标为空, 该位置上是没有元素的。因此循环队列会有一个空间上的浪费
  * @author yufeng
- * @create 2019-07-16
+ * @create 2019-07-06
  */
 public class LoopQueue<E> implements Queue<E> {
 
     private E[] data;
 
-    // 指向队首
-    private int front;
+    private int front, tail;
 
-    // 指向队尾
-    private int tail;
-
-    private int size;   // jdk中的size = (tail - front) > 0 ? tail - front : (tail - front) + getCapacity()
+    private int size;
 
     public LoopQueue() {
         this(10);
     }
 
-
     /**
-     * 构造函数，有意识浪费一个空间
+     * 构造函数, 有意识浪费一个空间
      */
     public LoopQueue(int capacity) {
         data = (E[])new Object[capacity + 1];
@@ -41,14 +36,12 @@ public class LoopQueue<E> implements Queue<E> {
         size = 0;
     }
 
-
     /**
      * 获取队列的容量
      */
     public int getCapacity() {
         return data.length - 1;
     }
-
 
     /**
      * 判断队列是否为空
@@ -58,7 +51,6 @@ public class LoopQueue<E> implements Queue<E> {
         return front == tail;
     }
 
-
     /**
      * 获取队列的元素数量
      */
@@ -67,9 +59,8 @@ public class LoopQueue<E> implements Queue<E> {
         return size;
     }
 
-
     /**
-     * 查看队列首部元素
+     * 查看队首元素
      */
     @Override
     public E getFront() {
@@ -79,19 +70,14 @@ public class LoopQueue<E> implements Queue<E> {
         return data[front];
     }
 
-
     /**
-     * 入队(操作的是队尾)
-     *    1. 入队操作需要维护队尾下标tail和size
-     *    2. tail指针的所在的位置没有元素。比如有10个元素, a[0]~a[9]都满了, tail 指向的是10。
-     *       (数组队列的tail和链表的tail有区别, 链表的tail上面有元素)
-     * 均摊时间复杂度: O(1)
+     * 入队: 需维护队尾下标tail和元素数量size
      */
     @Override
     public void enqueue(E e) {
         // 队列是否已满
         if ((tail + 1) % data.length == front) {
-            resize(getCapacity() * 2);      // 进行扩容操作
+            resize(getCapacity() * 2);
         }
 
         data[tail] = e;
@@ -99,11 +85,8 @@ public class LoopQueue<E> implements Queue<E> {
         size ++;
     }
 
-
     /**
-     * 出队(操作的是队首)
-     *    1. 出队操作需要维护队首下标front和size
-     * 均摊时间复杂度: O(1)
+     * 出队: 需维护队首下标front和size
      */
     @Override
     public E dequeue() {
@@ -113,30 +96,28 @@ public class LoopQueue<E> implements Queue<E> {
         }
 
         E ret = data[front];
-        data[front] = null;
+        data[front] = null;                             // help GC
         front = (front + 1) % data.length;
         size --;
 
         if (size == getCapacity() / 4 && getCapacity() / 2 != 0) {
-            resize(getCapacity() / 2);      // 进行缩容操作
+            resize(getCapacity() / 2);       // 缩容
         }
         return ret;
     }
 
-
     /**
-     * 扩容操作(将原先的队列按顺序进行重排)
+     * 调整容量并将原先的队列按顺序进行重排
      */
     private void resize(int newCapacity) {
         E[] newData = (E[])new Object[newCapacity + 1];
         for (int i = 0; i < newData.length; i ++) {                     // 第一种循环遍历方式
             newData[i] = data[(i + front) % data.length];
         }
-        data = newData;                                                 // 重置队首和队尾
+        data = newData;                                                 // 重置队首和队尾下标
         front = 0;
         tail = size;
     }
-
 
     /**
      * 打印循环队列
@@ -153,6 +134,6 @@ public class LoopQueue<E> implements Queue<E> {
             }
         }
         res.append("] tail");
-        return super.toString();
+        return res.toString();
     }
 }
