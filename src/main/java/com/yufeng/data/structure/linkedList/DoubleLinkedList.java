@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.linkedList;
 
 /**
- * 描述:
+ * @description
  *      自定义双向列表(Double LinkedList)
  * @author yufeng
- * @create 2019-07-04
+ * @create 2019-07-10
  */
 public class DoubleLinkedList<E> {
 

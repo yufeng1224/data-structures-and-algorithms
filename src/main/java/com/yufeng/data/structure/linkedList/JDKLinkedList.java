@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.linkedList;
 
 /**
- * 描述:
+ * @description
  *      jdk中的linkedList仿写
  * @author yufeng
- * @create 2019-07-05
+ * @create 2019-07-10
  */
 public class JDKLinkedList<E> {
 
@@ -27,19 +27,12 @@ public class JDKLinkedList<E> {
         }
     }
 
+    /** 设置头结点和尾节点 */
+    private Node first, last;
 
-    /** first和last初始时都指向null, jdk中的LinkedList没有使用到虚拟头节点 */
-    // 头节点
-    private Node first;
-
-    // 尾节点
-    private Node last;
-
-    // 维护链表中的元素数量
     private int size;
 
     public JDKLinkedList() {}
-
 
     /**
      * 获取链表中元素的数量
@@ -48,9 +41,8 @@ public class JDKLinkedList<E> {
         return size;
     }
 
-
     /**
-     * 获取链表头节点的值
+     * 获取链表头结点的值
      */
     public E getFirst() {
         Node f = first;
@@ -60,9 +52,8 @@ public class JDKLinkedList<E> {
         return f.e;
     }
 
-
     /**
-     * 获取链表尾节点的值
+     * 获取链表尾结点的值
      */
     public E getLast() {
         Node l = last;
@@ -72,60 +63,53 @@ public class JDKLinkedList<E> {
         return l.e;
     }
 
-
     /**
-     * 在链表头添加新的节点, 值为e
+     * 在链表头添加新的元素e
      */
     public void addFirst(E e) {
         linkFirst(e);
     }
 
-
-    /** 私有辅助函数 */
     /**
-     * 在链表头添加新的节点
+     * 在链表头添加新的结点
      */
     private void linkFirst(E e) {
         Node f = first;
         Node newNode = new Node(null, e, f);
         first = newNode;
 
-        if (f == null) {        // 初始时first和last都为null, 所以需指向同一节点
+        if (f == null) {        // 初始时first和last都为null, 所以需指向同一结点
             last = newNode;
         } else {
-            f.prev = newNode;   // 原先的first节点, prev指针指向新的节点
+            f.prev = newNode;   // 原先的first结点, prev指针指向新的结点
         }
 
         size ++;
     }
 
-
     /**
-     * 在链表尾添加新的节点, 值为e
+     * 在链表尾添加新的元素e
      */
     public void addLast(E e) {
         linkLast(e);
     }
 
-
-    /** 私有辅助函数 */
     /**
-     * 在链表尾添加新的节点
+     * 在链表尾添加新的元素
      */
     private void linkLast(E e) {
         Node l = last;
         Node newNode = new Node(l, e, null);
         last = newNode;
 
-        if (l == null) {            // 初始时first和last都为null, 所以需指向同一节点
+        if (l == null) {            // 初始时first和last都为null, 所以需指向同一结点
             first = newNode;
         } else {
-            l.next = newNode;       // 原先的last节点, next指针指向新的节点
+            l.next = newNode;       // 原先的last结点, next指针指向新的结点
         }
 
         size ++;
     }
-
 
     /**
      * 在指定index位置添加新的元素
@@ -144,7 +128,7 @@ public class JDKLinkedList<E> {
 
 
     /**
-     * 在指定index位置添加新的元素(succ为原先index位置的节点, 新元素插入后, succ将变为后继节点)
+     * 在指定index位置添加新的元素(succ为原先index位置的结点, 新元素插入后, succ将变为后继结点)
      */
     private void linkBefore(E e, Node succ) {
         Node prev = succ.prev;
@@ -160,7 +144,6 @@ public class JDKLinkedList<E> {
         size ++;
     }
 
-
     /**
      * index 位置合法性校验
      */
@@ -168,9 +151,8 @@ public class JDKLinkedList<E> {
         return index >= 0 && index <= size;
     }
 
-
     /**
-     * 获取index位置节点的值
+     * 获取index位置结点的值
      */
     public E get(int index) {
         if (index < 0 || index >= size) {
@@ -179,9 +161,8 @@ public class JDKLinkedList<E> {
         return getNode(index).e;
     }
 
-
     /**
-     * 设置index位置节点的值
+     * 设置index位置结点的值
      */
     public E set(int index, E newVal) {
         if (index < 0 || index >= size) {
@@ -194,7 +175,6 @@ public class JDKLinkedList<E> {
 
         return oldVal;
     }
-
 
     /**
      * 获取index位置的node
@@ -215,9 +195,8 @@ public class JDKLinkedList<E> {
         }
     }
 
-
     /**
-     * 删除链表头节点, 并返回节点的值
+     * 删除链表头结点, 并返回节点的值
      */
     public E removeFirst() {
         Node f = first;
@@ -227,9 +206,8 @@ public class JDKLinkedList<E> {
         return unlinkFirst(f);
     }
 
-
     /**
-     * 删除链表头节点, 并返回节点的值
+     * 删除链表头结点, 并返回结点的值
      */
     private E unlinkFirst(Node f) {
         E retVal = f.e;
@@ -248,9 +226,8 @@ public class JDKLinkedList<E> {
         return retVal;
     }
 
-
     /**
-     * 删除链表尾节点
+     * 删除链表尾结点
      */
     public E removeLast() {
         Node l = last;
@@ -260,9 +237,8 @@ public class JDKLinkedList<E> {
         return unlinkLast(l);
     }
 
-
     /**
-     * 删除链表尾节点, 并返回节点的值
+     * 删除链表尾结点, 并返回结点的值
      */
     private E unlinkLast(Node l) {
         E retVal = l.e;
@@ -282,9 +258,8 @@ public class JDKLinkedList<E> {
         return retVal;
     }
 
-
     /**
-     * 删除index位置的节点, 并返回节点的值
+     * 删除index位置的结点, 并返回结点的值
      */
     public E remove(int index) {
         if (index < 0|| index >= size) {
@@ -293,9 +268,8 @@ public class JDKLinkedList<E> {
         return unlink(getNode(index));
     }
 
-
     /**
-     * 删除链表中的节点x, 并返回节点的值
+     * 删除链表中的结点x, 并返回节点的值
      */
     private E unlink(Node x) {
         E retVal = x.e;
@@ -321,7 +295,6 @@ public class JDKLinkedList<E> {
         size --;
         return retVal;
     }
-
 
     /**
      * 删除值等于e的节点

@@ -1,26 +1,22 @@
-package com.yufeng.data.structure.linkedList.test;
+package com.yufeng.data.structure.linkedList;
 
-
-import com.yufeng.data.structure.linkedList.LinkedList;
 
 /**
- * 描述:
+ * @description
  *      单向链表测试类
  * @author yufeng
  * @create 2019-07-03
  */
-public class LinkedListTest {
+public class ListTest {
 
     public static void main(String[] args) {
-        linkedListTest01();
+        linkedListTest();
     }
 
-
     /**
-     * linkedListTest01
+     * linkedListTest
      */
-    public static void linkedListTest01() {
-
+    public static void linkedListTest() {
         LinkedList<Integer> list = new LinkedList<>();
         for (int i = 0; i < 10; i ++) {
             list.addLast(i);
