@@ -25,6 +25,11 @@ public class JDKLinkedList<E> {
             this.prev = prev;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return e.toString();
+        }
     }
 
     /** 设置头结点和尾节点 */
@@ -125,7 +130,6 @@ public class JDKLinkedList<E> {
             linkBefore(e, getNode(index));
         }
     }
-
 
     /**
      * 在指定index位置添加新的元素(succ为原先index位置的结点, 新元素插入后, succ将变为后继结点)
@@ -317,4 +321,15 @@ public class JDKLinkedList<E> {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (Node cur = first; cur != null; cur = cur.next) {
+            res.append(cur + "->");
+        }
+        res.append("NULL");
+        return res.toString();
+    }
+
 }

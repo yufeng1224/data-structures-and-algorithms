@@ -10,7 +10,8 @@ package com.yufeng.data.structure.linkedList;
 public class ListTest {
 
     public static void main(String[] args) {
-        linkedListTest();
+        // linkedListTest();
+        jdkLinkedListTest();
     }
 
     /**
@@ -42,4 +43,26 @@ public class ListTest {
         list.removeLast();
         System.out.println(list);
     }
+
+    /**
+     * jdkLinkedList
+     */
+    public static void jdkLinkedListTest() {
+        JDKLinkedList<Integer> jdkLinkedList = new JDKLinkedList<>();
+        for (int i = 0; i < 20; i ++) {
+            jdkLinkedList.addFirst(i);
+        }
+        System.out.println(jdkLinkedList);
+        jdkLinkedList.addLast(30);
+        System.out.println(jdkLinkedList);
+
+        System.out.println("jdkLinkedList.size(): " + jdkLinkedList.size());
+        System.out.println(jdkLinkedList.get(jdkLinkedList.size() - 1));
+
+        jdkLinkedList.removeFirst();
+        jdkLinkedList.removeLast();
+
+        System.out.println(jdkLinkedList);
+    }
+
 }

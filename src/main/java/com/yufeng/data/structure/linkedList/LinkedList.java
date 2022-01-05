@@ -133,7 +133,7 @@ public class LinkedList<E> {
      * 获得链表的第index个位置的元素
      */
     public E get(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed. Illegal Index");
         }
         Node cur = dummyHead.next;
@@ -147,7 +147,7 @@ public class LinkedList<E> {
      * 递归方式查询链表的index位置上的元素
      */
     public E getNode(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed. Illegal Index");
         }
         return getNodeByRecursive(index, 0, dummyHead.next);
@@ -167,7 +167,7 @@ public class LinkedList<E> {
      * 修改链表中的第index个位置的元素e
      */
     public void set(int index, E e) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed. Illegal Index");
         }
         Node cur = dummyHead.next;
@@ -181,8 +181,8 @@ public class LinkedList<E> {
      * 递归方式修改链表的index位置上的元素
      */
     public void setNode(int index, E e) {
-        if (index < 0 || index > size) {
-            throw new IllegalArgumentException("Get failed. Illegal Index");
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Set failed. Illegal Index");
         }
         setNodeByRecursive(index, 0, dummyHead, e);
     }
@@ -216,7 +216,7 @@ public class LinkedList<E> {
      * 从链表中删除index位置的元素, 返回删除的元素
      */
     public E remove(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed. Illegal Index");
         }
         Node prev = dummyHead;
@@ -237,7 +237,7 @@ public class LinkedList<E> {
      * 使用递归方式删除链表的index位置上的元素
      */
     public E removeNode(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed. Illegal Index");
         }
         return removeNodeByRecursive(index, 0, dummyHead);
