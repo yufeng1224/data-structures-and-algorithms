@@ -5,7 +5,7 @@ package com.yufeng.data.structure.array.applications;
  *      Two-Dimensional Arrays and Positional Games
  *      Simulation of a Tic-Tac-Toe game
  * @author yufeng
- * @create 2020-01-20
+ * @create
  */
 public class TicTacToe {
 

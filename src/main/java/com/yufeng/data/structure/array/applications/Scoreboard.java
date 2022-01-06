@@ -4,7 +4,7 @@ package com.yufeng.data.structure.array.applications;
  * @description
  *     Class for storing high scores in an array in nondecreasing order
  * @author yufeng
- * @create 2020-01-20
+ * @create
  */
 public class Scoreboard {
 
