@@ -12,5 +12,6 @@ data-structures-and-algorithms
 
 | **1 数组** | [array](src/main/java/com/yufeng/data/structure/array) |
 | :--- | :---: |
-| 2 栈 | [stack](src/main/java/com/yufeng/data/structure/stack) |
+| **2 栈**  |  [stack](src/main/java/com/yufeng/data/structure/stack) |
+
 
