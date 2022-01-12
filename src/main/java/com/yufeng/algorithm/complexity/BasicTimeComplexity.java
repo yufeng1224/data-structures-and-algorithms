@@ -11,7 +11,7 @@ public class BasicTimeComplexity {
     /**
      * 数据规模每次增大10倍, 时间消耗演示
      */
-    public static void testTime() {
+    public void testTime() {
         for (int i = 1; i <= 9; i ++) {
             int n = (int)Math.pow(10, i);
 
@@ -31,7 +31,7 @@ public class BasicTimeComplexity {
     /**
      * 空间复杂度O(1)
      */
-    private static int sum1(int n) {
+    private int sum1(int n) {
         assert n >= 0;
         int ret = 0;
         for (int i = 0; i <= n; i ++) {
@@ -43,7 +43,7 @@ public class BasicTimeComplexity {
     /**
      * 空间复杂度O(n)
      */
-    private static int sum2(int n) {
+    private int sum2(int n) {
         assert n >= 0;
         if (n == 0) {
             return 0;
@@ -52,8 +52,9 @@ public class BasicTimeComplexity {
     }
 
     public static void main(String[] args) {
-        testTime();
-        sum1(10000);
-        sum2(10000);
+        BasicTimeComplexity basicTimeComplexity = new BasicTimeComplexity();
+        basicTimeComplexity.testTime();
+        basicTimeComplexity.sum1(10000);
+        basicTimeComplexity.sum2(10000);
     }
 }

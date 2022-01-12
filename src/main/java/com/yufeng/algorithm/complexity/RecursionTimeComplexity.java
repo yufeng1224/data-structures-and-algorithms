@@ -12,7 +12,7 @@ public class RecursionTimeComplexity {
      * 二分查找法
      * 时间复杂度O(logN)
      */
-    private static int binarySearch(Comparable[] arr, int l, int r, int target) {
+    private int binarySearch(Comparable[] arr, int l, int r, int target) {
         if (l > r) {
             return  -1;
         }
@@ -29,7 +29,7 @@ public class RecursionTimeComplexity {
     /**
      * 递归深度n, 时间复杂度O(n)
      */
-    private static int sum(int n) {
+    private int sum(int n) {
         assert n >= 0;
         if (n == 0) {
             return 0;
@@ -40,7 +40,7 @@ public class RecursionTimeComplexity {
     /**
      * 递归深度logN, 时间复杂度O(logN)
      */
-    private static double pow(double x, int n) {
+    private double pow(double x, int n) {
         assert n >= 0;
         if (n == 0) {
             return 1.0;
@@ -56,7 +56,7 @@ public class RecursionTimeComplexity {
      * 递归中多次调用。指数级的算法, O(2^n)
      * 非常慢!
      */
-    private static int f(int n) {
+    private int f(int n) {
         assert (n >= 0);
 
         if (n == 0) {
@@ -66,9 +66,10 @@ public class RecursionTimeComplexity {
     }
 
     public static void main(String[] args) {
-        System.out.println(sum(100));
-        System.out.println(pow(2, 10));
+        RecursionTimeComplexity r = new RecursionTimeComplexity();
 
-        System.out.println(f(10));
+        System.out.println(r.sum(100));
+        System.out.println(r.pow(2, 10));
+        System.out.println(r.f(10));
     }
 }

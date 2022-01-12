@@ -13,7 +13,7 @@ public class CommonCodeTimeComplexity {
      * 数组交换
      * 时间复杂度O(1)
      */
-    public static void swap(Object[] arr, int i, int j) {
+    public void swap(Object[] arr, int i, int j) {
         if (i < 0 || i >= arr.length) {
             throw new IllegalArgumentException("i is out of bound.");
         }
@@ -30,7 +30,7 @@ public class CommonCodeTimeComplexity {
      * 求和
      * 时间复杂度O(n)
      */
-    public static int sum(int n) {
+    public int sum(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("n should be greater or equal to zero");
         }
@@ -45,7 +45,7 @@ public class CommonCodeTimeComplexity {
      * 数组反转
      * 时间复杂度O(n)
      */
-    public static void reverse(Object[] arr) {
+    public void reverse(Object[] arr) {
         int n = arr.length;
         for (int i = 0; i < n/2; i ++) {
             swap(arr, i, n-1-i);
@@ -56,7 +56,7 @@ public class CommonCodeTimeComplexity {
      * 选择排序法
      * 时间复杂度O(n^2)
      */
-    public static void selectionSort(Comparable[] arr, int n) {
+    public void selectionSort(Comparable[] arr, int n) {
         for (int i = 0; i < n; i ++) {
             int minIndex = i;
             for (int j = i + 1; j < n; j ++) {
@@ -72,7 +72,7 @@ public class CommonCodeTimeComplexity {
      * 内层函数是常数阶
      * 时间复杂度O(n)
      */
-    public static void printInformation(int n) {
+    public void printInformation(int n) {
         for (int i = 1; i <= n; i ++) {
             for (int j = 1; j <= 30; j ++) {
                 System.out.println("Class" + i + "-" + "No." + j);
@@ -84,7 +84,7 @@ public class CommonCodeTimeComplexity {
      * 二分查找法
      * 时间复杂度O(logN)
      */
-    public static int binarySearch(Comparable[] arr, int n, int target) {
+    public int binarySearch(Comparable[] arr, int n, int target) {
         int l = 0, r = n - 1;
         while (l <= r) {
             int mid = l + (r - l) / 2;
@@ -103,7 +103,7 @@ public class CommonCodeTimeComplexity {
      * 将数字整型转换为字符串
      * 时间复杂度O(lgN)
      */
-    public static String intToString(int num) {
+    public String intToString(int num) {
         StringBuilder s = new StringBuilder();
         String sign = "+";
         if (num < 0) {
@@ -131,7 +131,7 @@ public class CommonCodeTimeComplexity {
      * 时间复杂度O(n*logN)
      * 注意外层循环增量的变化
      */
-    public static void hello(int n) {
+    public void hello(int n) {
         for (int sz = 1; sz < n; sz += sz) {
             for (int i = 1; i < n; i ++) {
                 System.out.println("Hello, Algorithm!");
@@ -143,7 +143,7 @@ public class CommonCodeTimeComplexity {
      * 判断是否是素数
      * 时间复杂度O(sqrt(n))
      */
-    public static boolean isPrime(int num) {
+    public boolean isPrime(int num) {
         for (int x = 2; x * x <= num; x ++) {
             if (num % x == 0) {
                 return false;
@@ -156,7 +156,7 @@ public class CommonCodeTimeComplexity {
      * 判断是否是素数(优化)
      * 时间复杂度O(sqrt(n))
      */
-    public static boolean isPrime2(int num) {
+    public boolean isPrime2(int num) {
         if (num <= 1) {
             return false;
         }
@@ -173,24 +173,26 @@ public class CommonCodeTimeComplexity {
     }
 
     public static void main(String[] args) {
-        System.out.println(intToString(123));
-        System.out.println(intToString(0));
-        System.out.println(intToString(-123));
+        CommonCodeTimeComplexity c = new CommonCodeTimeComplexity();
+
+        System.out.println(c.intToString(123));
+        System.out.println(c.intToString(0));
+        System.out.println(c.intToString(-123));
 
         System.out.println();
-        if (isPrime2(137)) {
+        if (c.isPrime2(137)) {
             System.out.println("137 is a prime");
         } else {
             System.out.println("137 is not a prime");
         }
 
-        if (isPrime(121)) {
+        if (c.isPrime(121)) {
             System.out.println("121 is a prime");
         } else {
             System.out.println("121 is not a prime");
         }
 
-        hello(4);
+        c.hello(4);
     }
 }
 
