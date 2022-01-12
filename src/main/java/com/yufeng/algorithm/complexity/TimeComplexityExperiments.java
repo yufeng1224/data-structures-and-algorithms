@@ -53,7 +53,7 @@ public class TimeComplexityExperiments {
             Integer[] arr = MyUtil.generateRandomArray(n, 0, 100000000);
 
             long startTime = System.currentTimeMillis();
-            CommonCodeTimeComplexity.selectionSort(arr, n);
+            new CommonCodeTimeComplexity().selectionSort(arr, n);
             long endTime = System.currentTimeMillis();
 
             System.out.print("data size: 2^" + i + " = " + n + "\t");
@@ -72,7 +72,7 @@ public class TimeComplexityExperiments {
             Integer[] arr = MyUtil.generateOrderArray(n);
 
             long startTime = System.currentTimeMillis();
-            CommonCodeTimeComplexity.binarySearch(arr, n, 0);
+            new CommonCodeTimeComplexity().binarySearch(arr, n, 0);
             long endTime = System.currentTimeMillis();
 
             System.out.print("data size 2^" + i + " = " + n + "\t");
