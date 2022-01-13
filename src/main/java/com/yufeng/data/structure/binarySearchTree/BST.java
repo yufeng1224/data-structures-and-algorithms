@@ -5,22 +5,20 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * 描述:
- *      二分搜索树自定义实现
- *          1. E 必须要有可比性, 需要继承 Comparable 接口
+ * @description
+ *      1. 二分搜索树自定义实现
+ *      2. E 必须要有可比性, 需要继承 Comparable 接口
  * @author yufeng
- * @create 2019-07-20
+ * @create 2019-07-12
  */
 public class BST<E extends Comparable<E>> {
 
-    // 定义内部节点类 Node
+    /** 定义内部节点类 Node */
     private class Node {
 
         public E e;
 
-        public Node left;
-
-        public Node right;
+        public Node left, right;
 
         public Node(E e) {
             this.e = e;
@@ -45,15 +43,12 @@ public class BST<E extends Comparable<E>> {
         return size == 0;
     }
 
-
     /**
      * 获得二分搜索树元素的个数
-     * @return
      */
     public int getSize() {
         return size;
     }
-
 
     /**
      * 向二分搜索树中添加新的元素e
@@ -66,7 +61,6 @@ public class BST<E extends Comparable<E>> {
             add(root, e);
         }
     }
-
 
     /**
      * 向以node为根的二分搜索树中插入元素E(使用递归)
@@ -93,25 +87,20 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
-     * 向二分搜索树中添加新的元素e (对上面的add()方法进行优化)
+     * add()优化
      */
     public void addNode(E e) {
         root = addNode(root, e);
     }
 
-
     /**
-     * 优化后的插入元素方式(递归算法), 并返回插入新节点后二分搜索树的根
-     * 根据上面添加元素的逻辑:
-     *    1. 宏观上来看: 无论是插入到左子树或者右子树, 只要递归到最后一层，放入的条件都是当前node == null;
-     *    2. 从操作上来看, 每次比较都要确定插入是在当前结点的左边还是右边;
-     *    3. 所以需要将插入的 node 挂接到它父亲节点的左子树或者右子树即可!
+     * 1. 向以node为根的二分搜索树中插入元素E
+     * 2. 优化递归条件
      */
     private Node addNode(Node node, E e) {
 
-        // 优化后的递归终止条件, 如果node==null的话, 肯定是要创建一个新的节点
+        // 优化后的递归终止条件: 如果node==null的话, 肯定是要创建一个新的节点
         if (node == null) {
             size ++;
             return new Node(e);
@@ -119,22 +108,20 @@ public class BST<E extends Comparable<E>> {
 
         // 比较、插入以及挂接操作
         if (e.compareTo(node.e) < 0) {
-            node.left = addNode(node.left, e);
+            node.left = addNode(node.left, e);              // 接住当前node左子树的变化
         } else if (e.compareTo(node.e) > 0) {
-            node.right = addNode(node.right, e);
+            node.right = addNode(node.right, e);            // 接住当前node右子树的变化
         }
 
         return node;
     }
 
-
     /**
-     * 查看二分搜索树中是否包含元素e(递归实现)
+     * 查看二分搜索树中是否包含元素e
      */
     public boolean contains(E e) {
         return contains(root, e);
     }
-
 
     /**
      * 看以node为根的二分搜索树中是否包含元素e(递归实现)
@@ -155,14 +142,12 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
-     * 查看二分搜索树是否包含元素e(非递归实现)
+     * 查看二分搜索树是否包含元素e
      */
     public boolean containsNR(E e) {
         return containsNR(root, e);
     }
-
 
     /**
      * 非递归while循环实现
@@ -181,7 +166,6 @@ public class BST<E extends Comparable<E>> {
         return false;
     }
 
-
     /**
      * 二分搜索树的前序遍历
      */
@@ -189,12 +173,10 @@ public class BST<E extends Comparable<E>> {
         preOrder(root);
     }
 
-
     /**
      * 前序遍历以node为根的二分搜索树, 递归算法
      */
     private void preOrder(Node node) {
-
         if (node == null) {         // 递归终止条件
             return;
         }
@@ -575,7 +557,6 @@ public class BST<E extends Comparable<E>> {
         return level;
     }
 
-
     /**
      * 基于前序遍历的字符串输出
      */
@@ -585,7 +566,6 @@ public class BST<E extends Comparable<E>> {
         generateBSTString(root, 0, res);
         return res.toString();
     }
-
 
     /**
      * 生成以node为根节点, 深度为depth的描述二叉树的字符串
@@ -600,7 +580,6 @@ public class BST<E extends Comparable<E>> {
         generateBSTString(node.left, depth + 1, res);
         generateBSTString(node.right, depth + 1, res);
     }
-
 
     /**
      * 这里是根据深度来打印输出 --

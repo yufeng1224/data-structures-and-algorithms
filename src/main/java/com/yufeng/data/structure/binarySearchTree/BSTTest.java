@@ -1,15 +1,14 @@
-package com.yufeng.data.structure.binarySearchTree.test;
-
-import com.yufeng.data.structure.binarySearchTree.BST;
+package com.yufeng.data.structure.binarySearchTree;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+
 /**
- * 描述:
+ * @description
  *      二分搜索树测试类
  * @author yufeng
- * @create 2019-07-22
+ * @create 2019-07-12
  */
 public class BSTTest {
 
@@ -20,7 +19,6 @@ public class BSTTest {
 
         bstTest03();
     }
-
 
     private static void bstTest01() {
         BST<Integer> bst = new BST<>();
@@ -75,7 +73,6 @@ public class BSTTest {
         System.out.println();
     }
 
-
     private static void bstTest02() {
         // 最小值测试
         BST<Integer> bst = new BST<>();
@@ -106,7 +103,6 @@ public class BSTTest {
         System.out.println("removeMin test completed");
     }
 
-
     private static void bstTest03() {
         BST<Integer> bst = new BST<>();
         int[] nums = {10, 5, 4, 8, 15, 12, 16};
@@ -114,8 +110,6 @@ public class BSTTest {
         for (int num : nums) {
             bst.addNode(num);
         }
-
-
     }
 
 }
