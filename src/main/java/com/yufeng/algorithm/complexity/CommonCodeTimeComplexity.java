@@ -11,7 +11,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 数组交换
-     * 时间复杂度O(1)
+     * 时间复杂度: O(1)
      */
     public void swap(Object[] arr, int i, int j) {
         if (i < 0 || i >= arr.length) {
@@ -28,7 +28,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 求和
-     * 时间复杂度O(n)
+     * 时间复杂度: O(n)
      */
     public int sum(int n) {
         if (n < 0) {
@@ -43,18 +43,18 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 数组反转
-     * 时间复杂度O(n)
+     * 时间复杂度: O(n)
      */
     public void reverse(Object[] arr) {
         int n = arr.length;
-        for (int i = 0; i < n/2; i ++) {
-            swap(arr, i, n-1-i);
+        for (int i = 0; i < n / 2; i ++) {
+            swap(arr, i, n - 1 - i);
         }
     }
 
     /**
      * 选择排序法
-     * 时间复杂度O(n^2)
+     * 时间复杂度: O(n^2)
      */
     public void selectionSort(Comparable[] arr, int n) {
         for (int i = 0; i < n; i ++) {
@@ -70,7 +70,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 内层函数是常数阶
-     * 时间复杂度O(n)
+     * 时间复杂度: O(n)
      */
     public void printInformation(int n) {
         for (int i = 1; i <= n; i ++) {
@@ -82,7 +82,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 二分查找法
-     * 时间复杂度O(logN)
+     * 时间复杂度: O(logn)
      */
     public int binarySearch(Comparable[] arr, int n, int target) {
         int l = 0, r = n - 1;
@@ -101,7 +101,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 将数字整型转换为字符串
-     * 时间复杂度O(lgN)
+     * 时间复杂度: O(logn)
      */
     public String intToString(int num) {
         StringBuilder s = new StringBuilder();
@@ -128,8 +128,8 @@ public class CommonCodeTimeComplexity {
     }
 
     /**
-     * 时间复杂度O(n*logN)
      * 注意外层循环增量的变化
+     * 时间复杂度: O(n*logN)
      */
     public void hello(int n) {
         for (int sz = 1; sz < n; sz += sz) {
@@ -141,7 +141,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 判断是否是素数
-     * 时间复杂度O(sqrt(n))
+     * 时间复杂度: O(sqrt(n))
      */
     public boolean isPrime(int num) {
         for (int x = 2; x * x <= num; x ++) {
@@ -154,7 +154,7 @@ public class CommonCodeTimeComplexity {
 
     /**
      * 判断是否是素数(优化)
-     * 时间复杂度O(sqrt(n))
+     * 时间复杂度: O(sqrt(n))
      */
     public boolean isPrime2(int num) {
         if (num <= 1) {

@@ -21,7 +21,7 @@ public class MyVector<Item> {
     }
 
     /**
-     * 平均复杂度O(1)
+     * 平均复杂度: O(1)
      */
     public void push(Item e) {
         if (size == capacity) {
@@ -31,7 +31,7 @@ public class MyVector<Item> {
     }
 
     /**
-     * 平均复杂度O(1)
+     * 平均复杂度: O(1)
      */
     public Item pop() {
         if (size <= 0) {
@@ -46,7 +46,7 @@ public class MyVector<Item> {
     }
 
     /**
-     * 复杂度O(n)
+     * 复杂度: O(n)
      */
     private void resize(int newCapacity) {
         assert newCapacity >= size;

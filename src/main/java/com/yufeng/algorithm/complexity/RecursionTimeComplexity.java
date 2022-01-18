@@ -10,7 +10,7 @@ public class RecursionTimeComplexity {
 
     /**
      * 二分查找法
-     * 时间复杂度O(logN)
+     * 时间复杂度: O(logn)
      */
     private int binarySearch(Comparable[] arr, int l, int r, int target) {
         if (l > r) {
@@ -27,7 +27,8 @@ public class RecursionTimeComplexity {
     }
 
     /**
-     * 递归深度n, 时间复杂度O(n)
+     * 递归深度n
+     * 时间复杂度: O(n)
      */
     private int sum(int n) {
         assert n >= 0;
@@ -38,7 +39,8 @@ public class RecursionTimeComplexity {
     }
 
     /**
-     * 递归深度logN, 时间复杂度O(logN)
+     * 递归深度: logn
+     * 时间复杂度: O(logn)
      */
     private double pow(double x, int n) {
         assert n >= 0;
@@ -53,8 +55,8 @@ public class RecursionTimeComplexity {
     }
 
     /**
-     * 递归中多次调用。指数级的算法, O(2^n)
-     * 非常慢!
+     * 递归中多次调用, 指数级的算法。
+     * 时间复杂度: O(2^n), 非常慢!
      */
     private int f(int n) {
         assert (n >= 0);

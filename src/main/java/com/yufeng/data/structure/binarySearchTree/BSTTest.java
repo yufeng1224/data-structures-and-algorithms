@@ -13,14 +13,13 @@ import java.util.Random;
 public class BSTTest {
 
     public static void main(String[] args) {
-        bstTest01();
-
-        bstTest02();
-
-        bstTest03();
+        BSTTest test = new BSTTest();
+        test.bstTest01();
+        test.bstTest02();
+        test.bstTest03();
     }
 
-    private static void bstTest01() {
+    private void bstTest01() {
         BST<Integer> bst = new BST<>();
         int[] nums = {10, 5, 4, 8, 15, 12, 16};
 
@@ -73,7 +72,7 @@ public class BSTTest {
         System.out.println();
     }
 
-    private static void bstTest02() {
+    private void bstTest02() {
         // 最小值测试
         BST<Integer> bst = new BST<>();
         Random random = new Random();
@@ -101,9 +100,12 @@ public class BSTTest {
             }
         }
         System.out.println("removeMin test completed");
+
+        System.out.println(bst.removeMax());
+        System.out.println(bst.minimumNR());
     }
 
-    private static void bstTest03() {
+    private void bstTest03() {
         BST<Integer> bst = new BST<>();
         int[] nums = {10, 5, 4, 8, 15, 12, 16};
 

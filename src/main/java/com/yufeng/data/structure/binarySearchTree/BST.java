@@ -7,13 +7,13 @@ import java.util.Stack;
 /**
  * @description
  *      1. 二分搜索树自定义实现
- *      2. E 必须要有可比性, 需要继承 Comparable 接口
+ *      2. E必须要有可比性, 需要继承Comparable接口
  * @author yufeng
  * @create 2019-07-12
  */
 public class BST<E extends Comparable<E>> {
 
-    /** 定义内部节点类 Node */
+    /** 定义内部节点类Node */
     private class Node {
 
         public E e;
@@ -95,12 +95,11 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
-     * 1. 向以node为根的二分搜索树中插入元素E
-     * 2. 优化递归条件
+     * 向以node为根的二分搜索树中插入元素E
      */
     private Node addNode(Node node, E e) {
 
-        // 优化后的递归终止条件: 如果node==null的话, 肯定是要创建一个新的节点
+        // 优化递归终止条件: 如果node==null, 创建一个新的节点
         if (node == null) {
             size ++;
             return new Node(e);
@@ -124,7 +123,7 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
-     * 看以node为根的二分搜索树中是否包含元素e(递归实现)
+     * 查看以node为根的二分搜索树中是否包含元素e(递归实现)
      */
     private boolean contains(Node node, E e) {
         // 递归终止条件一
@@ -135,9 +134,9 @@ public class BST<E extends Comparable<E>> {
         // 递归终止条件二
         if (e.compareTo(node.e) == 0) {
             return true;
-        } else if (e.compareTo(node.e) < 0) {           // 如果e比当前节点小, 则遍历当前节点的左子树;
+        } else if (e.compareTo(node.e) < 0) {           // 如果e比当前节点小, 则遍历当前节点的左子树
             return contains(node.left, e);
-        } else {    // e.compareTo(node.e) > 0的情况     // 如果e比当前节点大, 则遍历当前节点的右子树;
+        } else {    // e.compareTo(node.e) > 0的情况     // 如果e比当前节点大, 则遍历当前节点的右子树
             return contains(node.right, e);
         }
     }
@@ -157,6 +156,7 @@ public class BST<E extends Comparable<E>> {
             if (node.e == e) {
                 return true;
             }
+
             if (node.e.compareTo(e) > 0) {
                 node = node.left;
             } else {
@@ -184,21 +184,21 @@ public class BST<E extends Comparable<E>> {
         preOrder(node.left);
         preOrder(node.right);
 
-        // 更加精简的写法: 当大家熟练地掌握了递归的时候, 可以不用先写递归终止的条件, 再写递归组成的逻辑。
-        // 当然, 良好的习惯还是要写下递归。 这样思路会比较清晰
-//        if (node != null) {
-//            System.out.println(node.e);
-//            preOrder(node.left);
-//            preOrder(node.right);
-//        }
+        // 更加精简的写法
+        /**
+        if (node != null) {
+            System.out.println(node.e);
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+         */
     }
 
-
     /**
-     * 二分搜索树的非递归前序遍历(深度优先遍历), 需要使用到辅助数据结构'栈'来实现
+     * 1. 二分搜索树的非递归前序遍历(深度优先遍历)
+     * 2. 需要使用到辅助数据结构'栈'来实现
      */
     public void preOrderNR() {
-
         Stack<Node> stack = new Stack<>();
         stack.push(root);
 
@@ -216,14 +216,12 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
      * 二分搜索树的中序遍历
      */
     public void inOrder() {
         inOrder(root);
     }
-
 
     /**
      * 中序遍历以node为根的二分搜索树, 递归算法
@@ -237,14 +235,12 @@ public class BST<E extends Comparable<E>> {
         inOrder(node.right);
     }
 
-
     /**
      * 二分搜索树的后序遍历
      */
     public void postOrder() {
         postOrder(root);
     }
-
 
     /**
      * 后序遍历以node为根的二分搜索树, 递归算法
@@ -258,10 +254,9 @@ public class BST<E extends Comparable<E>> {
         System.out.print(node.e + " ");
     }
 
-
     /**
-     * 二分搜索树的层序遍历, 也称为广度优先遍历
-     * (从根节点开始，排着队的进入队列)
+     * 1. 二分搜索树的层序遍历, 也称为广度优先遍历
+     * 2. 从根节点开始依次排着队的进入队列
      */
     public void levelOrder() {
         Queue<Node> queue = new LinkedList<>();
@@ -280,9 +275,9 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
-     * 二分搜索树的中序遍历(非递归实现), 需要使用到辅助数据结构 栈 来实现
+     * 1. 二分搜索树的中序遍历(非递归实现)
+     * 2. 需要使用到辅助数据结构'栈'来实现
      */
     public void inOrderNR() {
         Stack<Node> stack = new Stack<>();
@@ -301,9 +296,9 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
-     * 二分搜索树的后序遍历(非递归实现), 需要使用到辅助数据结构 栈 来实现
+     * 1. 二分搜索树的后序遍历(非递归实现)
+     * 2. 需要使用到辅助数据结构'栈'来实现
      */
     public void postOrderNR() {
         Stack<Node> stack = new Stack<>();
@@ -326,7 +321,6 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-
     /**
      * 寻找二分搜索树的最小元素
      */
@@ -336,7 +330,6 @@ public class BST<E extends Comparable<E>> {
         }
         return minimum(root).e;
     }
-
 
     /**
      * 返回以node为根的二分搜索树的最小值所在的节点(一直向左, 最左端的元素, 跟操作一个单向链表没区别)
@@ -348,7 +341,6 @@ public class BST<E extends Comparable<E>> {
         return minimum(node.left);
     }
 
-
     /**
      * 寻找二分搜索树的最小元素(非递归实现)
      */
@@ -358,7 +350,6 @@ public class BST<E extends Comparable<E>> {
         }
         return minimumNR(root).e;
     }
-
 
     /**
      * 返回以node为根的二分搜索树的最小值所在的节点(非递归写法)
@@ -370,7 +361,6 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
-
     /**
      * 寻找二分搜索树的最大元素
      */
@@ -381,9 +371,8 @@ public class BST<E extends Comparable<E>> {
         return maximum(root).e;
     }
 
-
     /**
-     * 返回以 node 为根的二分搜索树的最大值所在的节点
+     * 返回以node为根的二分搜索树的最大值所在的节点
      */
     private Node maximum(Node node) {
         if (node.right == null) {
@@ -391,7 +380,6 @@ public class BST<E extends Comparable<E>> {
         }
         return maximum(node.right);
     }
-
 
     /**
      * 从二分搜索树中删除最小值所在节点, 并返回节点的值
@@ -401,7 +389,6 @@ public class BST<E extends Comparable<E>> {
         root = removeMin(root);
         return ret;
     }
-
 
     /**
      * 删除掉以node为根的二分搜索树中的最小节点
@@ -414,10 +401,9 @@ public class BST<E extends Comparable<E>> {
             size --;
             return rightNode;
         }
-        node.left = removeMin(node.left);       // 节点进行重新连接, 将前面的rightNode 连接到这里的 node.left
+        node.left = removeMin(node.left);       // 节点重新连接
         return node;
     }
-
 
     /**
      * 从二分搜索树中删除最大值所在的节点, 并返回节点的值
@@ -427,7 +413,6 @@ public class BST<E extends Comparable<E>> {
         root = removeMax(root);
         return ret;
     }
-
 
     /**
      * 删除掉以node 为根的二分搜索树中的最大节点
@@ -440,10 +425,9 @@ public class BST<E extends Comparable<E>> {
             size --;
             return leftNode;
         }
-        node.right = removeMax(node.right);     // 这里重新进行了赋值操作(节点重新连接)
+        node.right = removeMax(node.right);     // 节点重新连接
         return node;
     }
-
 
     /**
      * 从二分搜索树中删除元素为e的节点
@@ -452,11 +436,10 @@ public class BST<E extends Comparable<E>> {
         root = remove(root, e);
     }
 
-
     /**
      * 删除以node为根的二分搜索树中值为e的节点, 并返回删除节点后新的二分搜索树
      */
-    private Node remove(Node node , E e) {
+    private Node remove(Node node, E e) {
         if (node == null) {
             return null;
         }
@@ -467,34 +450,34 @@ public class BST<E extends Comparable<E>> {
         } else if (e.compareTo(node.e) > 0) {
             node.right = remove(node.right, e);
             return node;
-        } else {            // e == node.e
-
-            if (node.left == null) {                 // 待删除节点左子树为空的情况, 保存一下右子树, 将node与当前节点断开, 返回它的右子树
+        } else {            // e.compareTo(node.e) == 0
+            if (node.left == null) {                 // 待删除节点左子树为空的情况, 返回它的右子树
                 Node rightNode = node.right;
                 node.right = null;
                 size -- ;
                 return rightNode;
-            } else if (node.right == null) {        // 待删除节点右子树为空的情况
+            } else if (node.right == null) {         // 待删除节点右子树为空的情况
                 Node leftNode = node.left;
                 node.left = null;
                 size -- ;
                 return leftNode;
             }
+            /** 以上两种情况都是子节点不满的情况 */
 
-            // 以上两种情况都是子节点不满的情况!
+            /**
+             * Hibbard Deletion
+             *    1. 待删除节点左右子树均不为空的情况
+             *    2. 找到待删除节点右子树的最小节点
+             *    3. 用这个节点替代删除节点的位置
+             */
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right); // 删除右子树中的自己
+            successor.left = node.left;
 
-            // 待删除节点左右子树均不为空的情况
-            // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
-            // 用这个节点替代删除节点的位置
-            Node successor = minimum(node.right);           // 先找到当前节点右子树中的最小节点，后继节点
-            successor.right = removeMin(node.right);        // (断连以及重新挂接操作)将当前节点右子树的所有节点挂接到这个后继节点上， 并去除原先模型中自己的那个节点
-            successor.left = node.left;                     // 将当前节点左子树的所有节点挂接到这个后继节点
-
-            node.left = node.right = null;                  // 将原来的节点失效  help GC
-            return successor;                               // 返回重新组装过的二分搜索树子集
+            node.left = node.right = null;           // help GC
+            return successor;
         }
     }
-
 
     /**
      * 计算树的深度
@@ -503,9 +486,9 @@ public class BST<E extends Comparable<E>> {
         return maxDepth(root);
     }
 
-
     /**
-     * 计算树的深度————递归实现(深度优先遍历)
+     * 1. 计算树的深度(递归实现)
+     * 2. 深度优先遍历
      */
     private int maxDepth(Node node) {
         // 递归终止条件
@@ -525,7 +508,6 @@ public class BST<E extends Comparable<E>> {
 //        }
 //        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
     }
-
 
     /**
      * 计算树的深度: 层序遍历 (广度优先搜索) 通过队列实现

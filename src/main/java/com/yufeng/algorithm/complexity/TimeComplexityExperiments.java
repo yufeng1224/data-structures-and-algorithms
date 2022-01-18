@@ -62,7 +62,7 @@ public class TimeComplexityExperiments {
     }
 
     /**
-     * O(logN)时间复杂度实验
+     * O(logn)时间复杂度实验
      */
     public static void testBinarySearch() {
         System.out.println("Test for Binary Search: ");
@@ -81,7 +81,7 @@ public class TimeComplexityExperiments {
     }
 
     /**
-     * O(n*logN)时间复杂度实验
+     * O(nlogn)时间复杂度实验
      */
     public static void testMergeSort() {
         System.out.println("Test for Merge Sort: ");

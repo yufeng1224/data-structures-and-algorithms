@@ -29,10 +29,12 @@ public class BasicTimeComplexity {
 
     /** 空间复杂度: 递归调用是有空间代价的。存在栈内存溢出的风险 */
     /**
-     * 空间复杂度O(1)
+     * 空间复杂度: O(1)
      */
     private int sum1(int n) {
-        assert n >= 0;
+        if (n <= 0) {
+            return 0;
+        }
         int ret = 0;
         for (int i = 0; i <= n; i ++) {
             ret += i;
@@ -41,10 +43,9 @@ public class BasicTimeComplexity {
     }
 
     /**
-     * 空间复杂度O(n)
+     * 空间复杂度: O(n)
      */
     private int sum2(int n) {
-        assert n >= 0;
         if (n == 0) {
             return 0;
         }
@@ -54,7 +55,7 @@ public class BasicTimeComplexity {
     public static void main(String[] args) {
         BasicTimeComplexity basicTimeComplexity = new BasicTimeComplexity();
         basicTimeComplexity.testTime();
-        basicTimeComplexity.sum1(10000);
-        basicTimeComplexity.sum2(10000);
+        System.out.println(basicTimeComplexity.sum1(10000));
+        System.out.println(basicTimeComplexity.sum2(10000));        // overflow
     }
 }
