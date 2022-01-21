@@ -1,4 +1,4 @@
-package com.yufeng.algorithm.util;
+package com.yufeng.leetcode.util;
 
 /**
  * @description

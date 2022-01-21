@@ -1,4 +1,4 @@
-package com.yufeng.algorithm.sort;
+package com.yufeng.leetcode.sort;
 
 /**
  * 描述:

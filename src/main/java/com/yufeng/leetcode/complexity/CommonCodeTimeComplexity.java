@@ -1,4 +1,4 @@
-package com.yufeng.algorithm.complexity;
+package com.yufeng.leetcode.complexity;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.yufeng.algorithm.usingArray;
+package com.yufeng.leetcode.usingArray;
 
 import java.util.ArrayList;
 

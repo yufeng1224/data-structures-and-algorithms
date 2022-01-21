@@ -1,6 +1,6 @@
-package com.yufeng.algorithm.usingArray;
+package com.yufeng.leetcode.usingArray;
 
-import com.yufeng.algorithm.util.MyUtil;
+import com.yufeng.leetcode.util.MyUtil;
 
 /**
  * @description

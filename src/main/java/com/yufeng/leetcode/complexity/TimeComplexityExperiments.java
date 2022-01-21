@@ -1,6 +1,6 @@
-package com.yufeng.algorithm.complexity;
+package com.yufeng.leetcode.complexity;
 
-import com.yufeng.algorithm.util.MyUtil;
+import com.yufeng.leetcode.util.MyUtil;
 
 /**
  * @description

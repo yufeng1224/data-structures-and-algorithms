@@ -495,23 +495,12 @@ public class BST<E extends Comparable<E>> {
         if (node == null) {
             return 0;
         }
-
-        int leftDepth = maxDepth(node.left);                    // 计算当前节点左子树的深度
-        int rightDepth = maxDepth(node.right);                  // 计算当前节点右子树的深度
-        int maxDepth = Math.max(leftDepth, rightDepth) + 1;     // 计算当前节点的最大深度
-
-        return maxDepth;
-
-        // 以上的代码思路比较清晰, 当然也可以精简成以下的代码
-//        if (node == null) {
-//            return 0;
-//        }
-//        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
+        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
     }
 
     /**
-     * 计算树的深度: 层序遍历 (广度优先搜索) 通过队列实现
-     * 每遍历一层, 则计数器+1， 直到遍历完成, 则可得到树的深度
+     * 计算树的深度: 层序遍历(广度优先搜索)通过队列实现
+     * 每遍历一层, 则计数器加一。 直到遍历完成, 则可得到树的深度
      */
     public int maxDepthLevelOrder() {
         if (root == null) {
