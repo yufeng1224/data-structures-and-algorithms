@@ -193,6 +193,7 @@ public class CommonCodeTimeComplexity {
         }
 
         c.hello(4);
+        c.printInformation(1);
     }
 }
 

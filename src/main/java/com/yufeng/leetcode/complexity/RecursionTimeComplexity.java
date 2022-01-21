@@ -43,7 +43,6 @@ public class RecursionTimeComplexity {
      * 时间复杂度: O(logn)
      */
     private double pow(double x, int n) {
-        assert n >= 0;
         if (n == 0) {
             return 1.0;
         }
@@ -59,9 +58,7 @@ public class RecursionTimeComplexity {
      * 时间复杂度: O(2^n), 非常慢!
      */
     private int f(int n) {
-        assert (n >= 0);
-
-        if (n == 0) {
+        if (n <= 0) {
             return 1;
         }
         return f(n - 1) + f(n - 2);
@@ -72,6 +69,9 @@ public class RecursionTimeComplexity {
 
         System.out.println(r.sum(100));
         System.out.println(r.pow(2, 10));
-        System.out.println(r.f(10));
+        System.out.println(r.f(4));
+
+        Integer[] arr = {3, 5, 7, 10, 8, 9};
+        System.out.println(r.binarySearch(arr, 0, arr.length - 1, 5));
     }
 }
