@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.map;
 
 /**
- * 描述:
+ * @description
  *     自定义映射接口
  * @author yufeng
- * @create 2019-08-10
+ * @create 2019-07-17
  */
 public interface Map<K, V> {
 

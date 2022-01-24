@@ -3,10 +3,10 @@ package com.yufeng.data.structure.map.impl;
 import com.yufeng.data.structure.map.Map;
 
 /**
- * 描述:
+ * @description
  *      基于链表实现的映射类
  * @author yufeng
- * @create 2019-08-12
+ * @create 2019-07-15
  */
 public class LinkedListMap<K, V> implements Map<K, V> {
 
@@ -48,22 +48,18 @@ public class LinkedListMap<K, V> implements Map<K, V> {
         size = 0;
     }
 
-
     @Override
     public int getSize() {
         return size;
     }
-
 
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-
-    /** 私有辅助函数 */
     /**
-     * 查询key值对应的节点
+     * 私有辅助函数: 查询key值对应的节点
      */
     private Node getNode(K key) {
         Node cur = dummyHead.next;
@@ -76,20 +72,16 @@ public class LinkedListMap<K, V> implements Map<K, V> {
         return null;
     }
 
-
     /**
      * 查询当前映射是否包含key
-     * 时间复杂度: O(n)
      */
     @Override
     public boolean contains(K key) {
         return getNode(key) != null;
     }
 
-
     /**
      * 查询key对应的value
-     * 时间复杂度: O(n)
      */
     @Override
     public V get(K key) {
@@ -97,10 +89,8 @@ public class LinkedListMap<K, V> implements Map<K, V> {
         return node == null ? null : node.value;
     }
 
-
     /**
      * 新增key-value节点
-     * 时间复杂度: O(n)
      */
     @Override
     public void add(K key, V value) {
@@ -109,14 +99,12 @@ public class LinkedListMap<K, V> implements Map<K, V> {
             dummyHead.next = new Node(key, value , dummyHead.next);
             size ++;
         } else {
-            node.value = value;         // 存在节点, 则对value进行重新赋值!
+            node.value = value;                         // 存在节点, 则对value进行重新赋值!
         }
     }
 
-
     /**
      * 对当前key进行重新赋值
-     * 时间复杂度: O(n)
      */
     @Override
     public void set(K key, V newValue) {
@@ -127,10 +115,8 @@ public class LinkedListMap<K, V> implements Map<K, V> {
         node.value = newValue;
     }
 
-
     /**
      * 删除key对应的节点
-     * 时间复杂度: O(n)
      */
     @Override
     public V remove(K key) {
