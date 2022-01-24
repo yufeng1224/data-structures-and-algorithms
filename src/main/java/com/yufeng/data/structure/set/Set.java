@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.set;
 
 /**
- * 描述:
+ * @description
  *      集合接口
  * @author yufeng
- * @create 2019-08-05
+ * @create 2019-07-15
  */
 public interface Set<E> {
 

@@ -1,16 +1,13 @@
 package com.yufeng.data.structure.set.impl;
 
 import com.yufeng.data.structure.linkedList.LinkedList;
-import com.yufeng.data.structure.set.test.FileOperation;
 import com.yufeng.data.structure.set.Set;
 
-import java.util.ArrayList;
-
 /**
- * 描述:
+ * @description
  *      基于链表实现的集合
  * @author yufeng
- * @create 2019-08-05
+ * @create 2019-07-15
  */
 public class LinkedListSet<E> implements Set<E> {
 
@@ -20,18 +17,15 @@ public class LinkedListSet<E> implements Set<E> {
         list = new LinkedList<>();
     }
 
-
     @Override
     public int getSize() {
         return list.getSize();
     }
 
-
     @Override
     public boolean isEmpty() {
         return list.isEmpty();
     }
-
 
     /**
      * 时间复杂度: O(n)
@@ -40,7 +34,6 @@ public class LinkedListSet<E> implements Set<E> {
     public boolean contains(E e) {
         return list.contains(e);
     }
-
 
     /**
      * 时间复杂度: O(n)
@@ -51,7 +44,6 @@ public class LinkedListSet<E> implements Set<E> {
             list.addFirst(e);
         }
     }
-
 
     /**
      * 时间复杂度: O(n)

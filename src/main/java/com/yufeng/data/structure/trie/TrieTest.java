@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.trie;
 
 import com.yufeng.data.structure.set.impl.BSTSet;
-import com.yufeng.data.structure.set.test.FileOperation;
+import com.yufeng.data.structure.set.FileOperation;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.hashTable.test;
 
 import com.yufeng.data.structure.hashTable.HashTable;
-import com.yufeng.data.structure.set.test.FileOperation;
+import com.yufeng.data.structure.set.FileOperation;
 
 import java.util.ArrayList;
 

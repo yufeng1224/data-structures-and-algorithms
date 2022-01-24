@@ -1,7 +1,7 @@
 package com.yufeng.data.structure.map.test;
 
 import com.yufeng.data.structure.map.impl.LinkedListMap;
-import com.yufeng.data.structure.set.test.FileOperation;
+import com.yufeng.data.structure.set.FileOperation;
 
 import java.util.ArrayList;
 
