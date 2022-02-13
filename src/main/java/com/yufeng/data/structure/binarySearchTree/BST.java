@@ -281,18 +281,18 @@ public class BST<E extends Comparable<E>> {
      */
     public void inOrderNR() {
         Stack<Node> stack = new Stack<>();
-        Node node = root;
+        Node cur = root;
 
-        // 循环终止要满足两种情况, node == null && 栈也空了!
-        while (node != null || !stack.empty()) {
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
+        // 循环终止满足的条件: cur == null && 栈也空了
+        while (cur != null || !stack.empty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
             }
 
-            node = stack.pop();
-            System.out.print(node.e + " ");
-            node = node.right;
+            cur = stack.pop();
+            System.out.print(cur.e + " ");
+            cur = cur.right;
         }
     }
 

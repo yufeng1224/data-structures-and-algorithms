@@ -8,11 +8,11 @@ package com.yufeng.leetcode.binaryTree;
  */
 public class TreeNode {
 
-    int val;
+    public int val;
 
-    TreeNode left, right;
+    public TreeNode left, right;
 
-    TreeNode(int x) {
+    public TreeNode(int x) {
         val = x;
     }
 
