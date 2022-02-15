@@ -1,6 +1,6 @@
 package com.yufeng.leetcode.complexity;
 
-import com.yufeng.leetcode.util.MyUtil;
+import com.yufeng.leetcode.util.ArrayGenerator;
 
 /**
  * @description
@@ -19,7 +19,7 @@ public class TimeComplexityExperiments {
 
         for (int i = 10; i <= 26; i ++) {
             int n = (int)Math.pow(2, i);
-            Integer[] arr = MyUtil.generateRandomArray(n, 0, 100000000);
+            Integer[] arr = ArrayGenerator.generateRandomArray(n, 0, 100000000);
 
             long startTime = System.currentTimeMillis();
             findMax(arr, n);
@@ -50,7 +50,7 @@ public class TimeComplexityExperiments {
 
         for (int i = 10; i <= 15; i ++) {
             int n = (int)Math.pow(2, i);
-            Integer[] arr = MyUtil.generateRandomArray(n, 0, 100000000);
+            Integer[] arr = ArrayGenerator.generateRandomArray(n, 0, 100000000);
 
             long startTime = System.currentTimeMillis();
             new CommonCodeTimeComplexity().selectionSort(arr, n);
@@ -69,7 +69,7 @@ public class TimeComplexityExperiments {
 
         for (int i = 20; i <= 28 ; i++) {
             int n = (int)Math.pow(2, i);
-            Integer[] arr = MyUtil.generateOrderArray(n);
+            Integer[] arr = ArrayGenerator.generateOrderArray(n);
 
             long startTime = System.currentTimeMillis();
             new CommonCodeTimeComplexity().binarySearch(arr, n, 0);
@@ -88,7 +88,7 @@ public class TimeComplexityExperiments {
 
         for (int i = 20; i <= 26 ; i++) {
             int n = (int)Math.pow(2, i);
-            Integer[] arr = MyUtil.generateRandomArray(n, 0, 1<<30);
+            Integer[] arr = ArrayGenerator.generateRandomArray(n, 0, 1<<30);
 
             long startTime = System.currentTimeMillis();
             mergeSort(arr, n);

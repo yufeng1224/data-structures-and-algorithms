@@ -1,6 +1,6 @@
 package com.yufeng.leetcode.usingArray;
 
-import com.yufeng.leetcode.util.MyUtil;
+import com.yufeng.leetcode.util.ArrayGenerator;
 
 /**
  * @description
@@ -56,7 +56,7 @@ public class BinarySearch {
         BinarySearch b = new BinarySearch();
 
         int n = (int)Math.pow(10, 7);
-        Integer[] data = MyUtil.generateOrderArray(n);
+        Integer[] data = ArrayGenerator.generateOrderArray(n);
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < n; i ++) {
