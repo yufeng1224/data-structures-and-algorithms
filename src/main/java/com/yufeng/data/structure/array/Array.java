@@ -140,7 +140,7 @@ public class Array<E> {
      */
     public boolean contains(E e) {
         for (int i = 0; i < size; i ++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
@@ -152,7 +152,7 @@ public class Array<E> {
      */
     public int find(E e) {
         for (int index = 0; index < size; index ++) {
-            if (data[index] == e) {
+            if (data[index].equals(e)) {
                 return index;
             }
         }
@@ -165,7 +165,7 @@ public class Array<E> {
     public int[] findAll(E e) {
         int number = 0;                                 // 统计元素e出现的次数
         for (int index = 0; index < size; index ++) {
-            if (data[index] == e) {
+            if (data[index].equals(e)) {
                 number ++;
             }
         }
@@ -177,7 +177,7 @@ public class Array<E> {
         int[] indexArr = new int[number];                // 将index索引位置存入数组并返回
         number = 0;
         for (int index = 0; index < size; index ++) {
-            if (data[index] == e) {
+            if (data[index].equals(e)) {
                 indexArr[number] = index;
                 number ++;
             }

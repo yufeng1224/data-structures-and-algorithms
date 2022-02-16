@@ -127,7 +127,7 @@ public class LoopQueue<E> implements Queue<E> {
         StringBuilder res  = new StringBuilder();
         res.append(String.format("Queue size = %d , capacity = %d\n", size, getCapacity()));
         res.append("front [");
-        for (int i = front ; i != tail; i = (i+1) % data.length) {          // 第二种遍历循环方式
+        for (int i = front ; i != tail; i = (i + 1) % data.length) {          // 第二种遍历循环方式
             res.append(data[i]);
             if ((i + 1) % data.length != tail) {
                 res.append(", ");

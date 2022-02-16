@@ -55,6 +55,21 @@ public class InsertionSort {
         }
     }
 
+    /**
+     * 1. 从后往前实现插入排序法
+     * 2. arr[0, i) 未排序, arr[i, n)已排好序
+     */
+    public static <E extends Comparable<E>> void sort4(E[] arr) {
+        for (int i = arr.length - 1; i >= 0; i --) {
+            E temp = arr[i];
+            int j;
+            for (j = i; j + 1 < arr.length && temp.compareTo(arr[j + 1])> 0; j ++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[j] = temp;
+        }
+    }
+
     private static <E> void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];

@@ -15,6 +15,53 @@ import java.util.Stack;
  */
 public class ClassicNonRecursivePostorderTraversal {
 
+    private class TagNode {
+        TreeNode node;
+
+        boolean isFirst;
+
+        TagNode(TreeNode node) {
+            this.node = node;
+            this.isFirst = false;
+        }
+    }
+
+    /**
+     * Non-Recursive
+     * Using a tag to record whether the node has been visited
+     *
+     * Time Complexity: O(n), n is the node number in the tree
+     * Space Complexity: O(h), h is the height of the tree
+     */
+    public List<Integer> postorderTraversal1(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Stack<TagNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(new TagNode(cur));
+                cur = cur.left;
+            }
+
+            TagNode tagNode = stack.pop();
+            cur = tagNode.node;
+            if (tagNode.isFirst == false) {
+                tagNode.isFirst = true;
+                stack.push(tagNode);
+                cur = cur.right;
+            } else {
+                res.add(cur.val);
+                cur = null;
+            }
+        }
+
+        return res;
+    }
+
     /**
      * using two stacks, revers preorder traversal!
      * time complexity: O(n); space complexity: O(n)
@@ -77,6 +124,42 @@ public class ClassicNonRecursivePostorderTraversal {
         return res;
     }
 
+    /**
+     * Using a pre pointer to record the last visited node
+     * Time Complexity: O(n); Space Complexity: O(h)
+     */
+    public List<Integer> postorderTraversal4(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            if ((cur.left == null && cur.right == null) ||
+                    (pre != null && pre == cur.left && cur.right == null) ||
+                    (pre != null && pre == cur.right)) {
+                res.add(cur.val);
+                pre = cur;
+            } else {
+                stack.push(cur);
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                }
+
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
+            }
+        }
+
+        return res;
+    }
+
     public List<Integer> postorderTraversal5(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<>();
         if (root == null) {
@@ -107,4 +190,38 @@ public class ClassicNonRecursivePostorderTraversal {
         return res;
     }
 
+    /**
+     * using a pre pointer to record the last visited node
+     * Time Complexity: O(n); Space Complexity: O(h)
+     */
+    public List<Integer> postorderTraversal6(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        TreeNode pre = null;
+
+
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                if (cur.right == null || pre == cur.right) {
+                    res.add(cur.val);
+                    pre = cur;
+                    cur = null;
+                } else {
+                    stack.push(cur);
+                    cur = cur.right;
+                }
+            }
+        }
+
+        return res;
+    }
 }
