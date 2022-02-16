@@ -1,8 +1,6 @@
 package com.yufeng.data.structure.queue;
 
-import com.yufeng.data.structure.queue.impl.ArrayQueue;
-import com.yufeng.data.structure.queue.impl.LinkedListQueue;
-import com.yufeng.data.structure.queue.impl.LoopQueue;
+import com.yufeng.data.structure.queue.impl.*;
 
 import java.util.Random;
 
@@ -15,15 +13,19 @@ import java.util.Random;
 public class QueueTest {
 
     public static void main(String[] args) {
-        arrayQueueTest();
-        loopQueueTest();
-        compareQueue();
+        QueueTest queueTest = new QueueTest();
+
+        queueTest.arrayQueueTest();
+        queueTest.loopQueueTest();
+        queueTest.compareQueue();
+        queueTest.dequeTest();
+
     }
 
     /**
      * 数组队列测试类
      */
-    private static void arrayQueueTest() {
+    private void arrayQueueTest() {
         ArrayQueue<Integer> queue = new ArrayQueue<>();
         for (int i = 0; i < 10; i ++) {
             queue.enqueue(i);
@@ -44,12 +46,52 @@ public class QueueTest {
     /**
      * 循环队列测试类
      */
-    private static void loopQueueTest() {
+    private void loopQueueTest() {
         LoopQueue<Integer> queue = new LoopQueue<>();
         for (int i = 0; i < 20; i ++) {
             queue.enqueue(i);
         }
         System.out.println(queue);
+
+        LoopQueueWithoutSize<Integer> loopQueueWithoutSize = new LoopQueueWithoutSize<>();
+        for (int i = 0; i < 20; i ++) {
+            loopQueueWithoutSize.enqueue(i);
+        }
+        System.out.println(loopQueueWithoutSize);
+
+        LoopQueueWithoutSpaceWaste<Integer> loopQueueWithoutSpaceWaste =
+                new LoopQueueWithoutSpaceWaste<>();
+        for (int i = 0; i < 20; i ++) {
+            loopQueueWithoutSpaceWaste.enqueue(i);
+        }
+        System.out.println(loopQueueWithoutSpaceWaste);
+    }
+
+    /**
+     * 双端队列测试类
+     */
+    public void dequeTest() {
+        Deque<Integer> deque = new Deque<>();
+        for (int i = 0; i < 16; i ++) {
+            if (i % 2 == 0) {
+                deque.addLast(i);
+            } else {
+                deque.addFront(i);
+            }
+        }
+        System.out.println(deque.getFront());
+        System.out.println(deque.getLast());
+        System.out.println(deque);
+
+        System.out.println();
+
+        for (int j = 0; !deque.isEmpty(); j ++) {
+            if (j % 2 == 0) {
+                deque.removeFront();
+            } else {
+                deque.removeLast();
+            }
+        }
     }
 
     /**
@@ -64,7 +106,7 @@ public class QueueTest {
      *    4-2 LoopQueue, time: 0.016635938 s
      *    4-3 LinkedListQueue, time: 0.01242973 s
      */
-    private static void compareQueue() {
+    private void compareQueue() {
         int opCount = 100000;
 
         ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
@@ -83,7 +125,7 @@ public class QueueTest {
     /**
      * 测试使用queue 运行opCount个入队和出队操作所需要的时间, 单位: 秒
      */
-    private static double testQueue(Queue<Integer> queue, int opCount) {
+    private double testQueue(Queue<Integer> queue, int opCount) {
         long startTime = System.nanoTime();
         Random random = new Random();
         for (int i = 0; i < opCount; i ++) {

@@ -6,11 +6,10 @@ import com.yufeng.data.structure.queue.Queue;
  * @description
  *     1. 基于数组实现循环队列
  *     2. 规则定义
- *        2-1 front: 指向队首
- *        2-2 tail: 指向队尾
- *        2-3 front == tail, 队列为空
- *        2-4 (tail + 1) % getCapacity() == front, 队列满了
- *        2-5 tail下标为空, 该位置上是没有元素的。因此循环队列会有一个空间上的浪费
+ *        2-1 front: 指向队首; tail: 指向队尾
+ *        2-2 front == tail, 队列为空
+ *        2-3 (tail + 1) % data.length == front, 队列满了
+ *        2-4 tail下标为空, 该位置上是没有元素的。因此循环队列会有一个空间上的浪费
  * @author yufeng
  * @create 2019-07-06
  */
@@ -91,7 +90,7 @@ public class LoopQueue<E> implements Queue<E> {
     @Override
     public E dequeue() {
         // 队列是否为空
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalArgumentException("Cannot dequeue from empty queue");
         }
 
