@@ -70,6 +70,20 @@ public class InsertionSort {
         }
     }
 
+    /**
+     * 对于区间中的数组进行排序
+     */
+    public static <E extends Comparable<E>> void sort5(E[] arr, int l, int r) {
+        for (int i = l; i <= r; i ++) {
+            E temp = arr[i];
+            int j;
+            for (j = i; j - 1 >= l && temp.compareTo(arr[j - 1]) < 0; j --) {
+                arr[j] = arr[j - 1];            // 数据交换改为赋值操作
+            }
+            arr[j] = temp;
+        }
+    }
+
     private static <E> void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];

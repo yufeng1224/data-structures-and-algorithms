@@ -26,6 +26,18 @@ public class SortingHelper {
             SelectionSort.sort1(arr);
         } else if (sortName.equals("InsertionSort")) {
             InsertionSort.sort3(arr);
+        } else if (sortName.equals("MergeSort4") || sortName.equals("MergeSort")) {
+            MergeSort.sort4(arr);
+        } else if (sortName.equals("MergeSort1")) {
+            MergeSort.sort(arr);
+        } else if (sortName.equals("MergeSort2")) {
+            MergeSort.sort2(arr);
+        } else if (sortName.equals("MergeSort3")) {
+            MergeSort.sort3(arr);
+        } else if (sortName.equals("MergeSortBU")) {
+            MergeSort.sortBU(arr);
+        } else if (sortName.equals("MergeSortBU2")) {
+            MergeSort.sortBU2(arr);
         }
 
         long endTime = System.nanoTime();
