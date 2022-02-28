@@ -15,7 +15,6 @@ public class InsertionSort {
     private InsertionSort(){}
 
     /** 插入排序时间复杂度: O(n^2) */
-
     /**
      * 实现方式1
      */
@@ -105,6 +104,12 @@ public class InsertionSort {
         }
         System.out.println();
 
+        Integer[] arr3 = {1, 4, 2, 3, 6, 5};
+        InsertionSort.sort4(arr3);
+        for (int j = 0; j < arr3.length; j ++) {
+            System.out.print(arr3[j] + " ");
+        }
+        System.out.println();
 
         /** 选择排序和插入排序比较 */
         int[] dataSize = {10000, 100000};
