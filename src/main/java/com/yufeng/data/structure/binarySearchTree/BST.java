@@ -116,6 +116,38 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
+     * 向二分搜索树中添加新的元素e(非递归实现)
+     */
+    public void addNoRecursive(E e) {
+        if (root == null) {
+            root = new Node(e);
+            size ++;
+            return;
+        }
+
+        Node p = root;
+        while (p != null) {
+            if (e.compareTo(p.e) < 0) {                      /** 待插入的节点的值小于当前节点的值 */
+                if (p.left == null) {
+                    p.left = new Node(e);
+                    size ++;
+                    return;
+                }
+                p = p.left;
+            } else if (e.compareTo(p.e) > 0) {               /** 待插入的节点的值大于当前节点的值 */
+                if (p.right == null) {
+                    p.right = new Node(e);
+                    size ++;
+                    return;
+                }
+                p = p.right;
+            } else {                                        /** 如果待插入的值等于当前p节点的值, 说明二分搜索树中已经有这个值了*/
+                return;
+            }
+        }
+    }
+
+    /**
      * 查看二分搜索树中是否包含元素e
      */
     public boolean contains(E e) {
