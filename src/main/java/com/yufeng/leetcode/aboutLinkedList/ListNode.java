@@ -2,7 +2,7 @@ package com.yufeng.leetcode.aboutLinkedList;
 
 /**
  * @description
- *      
+ *      节点实体类
  * @author yufeng
  * @create 2019-09-10
  */
