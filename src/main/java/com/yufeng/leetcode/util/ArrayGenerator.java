@@ -45,4 +45,23 @@ public class ArrayGenerator {
         }
         return arr;
     }
+
+    /**
+     * 打印数组
+     */
+    public static void printArr(int[] arr) {
+        for (int i = 0; i < arr.length; i ++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    /**
+     * 数据交换
+     */
+    public static <E> void swap(E[] arr, int i, int j) {
+        E temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }

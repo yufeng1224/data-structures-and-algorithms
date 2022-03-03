@@ -38,6 +38,16 @@ public class SortingHelper {
             MergeSort.sortBU(arr);
         } else if (sortName.equals("MergeSortBU2")) {
             MergeSort.sortBU2(arr);
+        } else if (sortName.equals("QuickSort")) {
+            QuickSort.sort(arr);
+        } else if (sortName.equals("QuickSort2")) {
+            QuickSort.sort2(arr);
+        } else if (sortName.equals("QuickSort3")) {
+            QuickSort.sort3(arr);
+        } else if (sortName.equals("QuickSortTwoWays")) {
+            QuickSort.sortTwoWays(arr);
+        } else if (sortName.equals("QuickSortThreeWays")) {
+            QuickSort.sortThreeWays(arr);
         }
 
         long endTime = System.nanoTime();
