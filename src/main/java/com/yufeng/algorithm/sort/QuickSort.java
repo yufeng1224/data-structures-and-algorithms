@@ -177,6 +177,28 @@ public class QuickSort {
         sortThreeWays(arr, gt, r, random);
     }
 
+    /**
+     * select K 问题
+     *    1. 在arr[l, r]的范围里求解整个数组的第K小元素并返回
+     *    2. K是索引, 从0开始计算
+     */
+    public static<E extends Comparable<E>> E selectK(E[] arr, int k) {
+        Random random = new Random();
+        return selectK(arr, 0, arr.length - 1, k, random);
+    }
+
+    private static<E extends Comparable<E>> E selectK(E[] arr, int l, int r, int k, Random random) {
+        int p = partition2(arr, l, r, random);
+
+        if (k == p) {
+            return arr[p];
+        }
+        if (k < p) {
+            return selectK(arr, l, p - 1, k, random);
+        }
+        return selectK(arr, p + 1, r, k, random);
+    }
+
     public static void main(String[] args) {
         int n = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
