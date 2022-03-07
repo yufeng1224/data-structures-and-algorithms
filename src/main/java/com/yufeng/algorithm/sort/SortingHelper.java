@@ -48,6 +48,10 @@ public class SortingHelper {
             QuickSort.sortTwoWays(arr);
         } else if (sortName.equals("QuickSortThreeWays")) {
             QuickSort.sortThreeWays(arr);
+        } else if (sortName.equals("HeapSort")) {
+            HeapSort.sort(arr);
+        } else if (sortName.equals("HeapSort2")) {
+            HeapSort.sort2(arr);
         }
 
         long endTime = System.nanoTime();

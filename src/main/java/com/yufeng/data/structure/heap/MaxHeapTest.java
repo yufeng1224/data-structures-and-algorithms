@@ -20,19 +20,44 @@ public class MaxHeapTest {
         }
 
         /** 将n个元素逐个插入到一个空堆中 */
-        double time1 = testHeap(testData, false);
+        double time1 = testMaxHeap(testData, false);
         System.out.println("Without heapify: " + time1 + " s");
 
         /** heapify的过程 */
-        double time2 = testHeap(testData, true);
+        double time2 = testMaxHeap(testData, true);
         System.out.println("With heapify: " + time2 + " s");
+
+        /** 最小堆测试 */
+        testMinHeap();
+    }
+
+    private static void testMinHeap() {
+        int n = 1000000;
+        Random random = new Random();
+
+        MinHeap<Integer> minHeap = new MinHeap<>();
+        for (int i = 0; i < n; i ++) {
+            minHeap.add(random.nextInt(Integer.MAX_VALUE));
+        }
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i ++) {
+            arr[i] = minHeap.extractMin();
+        }
+
+        for (int j = 1; j < n; j ++) {
+            if (arr[j - 1] > arr[j]) {
+                throw new IllegalArgumentException("Error");
+            }
+        }
+        System.out.println("Test MinHeap completed");
     }
 
     /**
      * Without heapify: 1.300572741 s
      * With heapify: 1.209367557 s
      */
-    private static double testHeap(Integer[] testData, boolean isHeapify) {
+    private static double testMaxHeap(Integer[] testData, boolean isHeapify) {
         long startTime = System.nanoTime();
 
         MaxHeap<Integer> maxHeap;
@@ -40,8 +65,9 @@ public class MaxHeapTest {
             maxHeap = new MaxHeap<>(testData);
         } else {
             maxHeap = new MaxHeap<>();
-            for (int num: testData)
+            for (int num: testData) {
                 maxHeap.add(num);
+            }
         }
 
         // 验证堆的正确性
