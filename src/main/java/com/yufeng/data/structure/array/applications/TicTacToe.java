@@ -5,7 +5,7 @@ package com.yufeng.data.structure.array.applications;
  *      Two-Dimensional Arrays and Positional Games
  *      Simulation of a Tic-Tac-Toe game
  * @author yufeng
- * @create
+ * @create 2019-07-02
  */
 public class TicTacToe {
 
@@ -17,14 +17,12 @@ public class TicTacToe {
 
     private int player;                                 // current player
 
-
     /**
      * Constructor
      */
     public TicTacToe() {
         clearBoard();
     }
-
 
     /**
      * Clears the board
@@ -37,7 +35,6 @@ public class TicTacToe {
         }
         player = X;                                      // the first player is 'X'
     }
-
 
     /**
      * Puts an X or O mark at position i,j.
@@ -55,7 +52,6 @@ public class TicTacToe {
         player = - player;                                // switch players (uses fact that O = - X)
     }
 
-
     /**
      * Checks whether the board configuration is a win for the given player.
      */
@@ -70,7 +66,6 @@ public class TicTacToe {
                 || (board[2][0] + board[1][1] + board[0][2] == mark * 3));          // rev diag
     }
 
-
     /**
      * Returns the winning player's code, or 0 to indicate a tie (or unfinished game).
      */
@@ -83,7 +78,6 @@ public class TicTacToe {
             return (0);
         }
     }
-
 
     /**
      * Returns a simple character string showing the current board.
@@ -112,7 +106,6 @@ public class TicTacToe {
         }
         return sb.toString();
     }
-
 
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();

@@ -4,14 +4,13 @@ package com.yufeng.data.structure.array.applications;
  * @description
  *     Simple Cryptography with Character Arrays
  * @author yufeng
- * @create
+ * @create 2019-07-02
  */
 public class CaesarCipher {
 
     protected char[ ] encoder = new char[26];       // Encryption array
 
     protected char[ ] decoder = new char[26];       // Decryption array
-
 
     /**
      * Constructor that initializes the encryption and decryption arrays
@@ -23,7 +22,6 @@ public class CaesarCipher {
         }
     }
 
-
     /**
      * Returns String representing encrypted message.
      */
@@ -31,14 +29,12 @@ public class CaesarCipher {
         return transform(message, encoder);         // use encoder array
     }
 
-
     /**
      * Returns decrypted message given encrypted secret.
      */
      public String decrypt(String secret) {
          return transform(secret, decoder);          // use decoder array
      }
-
 
     /**
      * Returns transformation of original String using given code.
@@ -53,7 +49,6 @@ public class CaesarCipher {
          }
         return new String(msg);
      }
-
 
      public static void main(String[ ] args) {
          CaesarCipher cipher = new CaesarCipher(3);

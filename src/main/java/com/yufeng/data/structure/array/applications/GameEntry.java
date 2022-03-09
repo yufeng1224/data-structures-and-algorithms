@@ -4,7 +4,7 @@ package com.yufeng.data.structure.array.applications;
  * @description
  *
  * @author yufeng
- * @create
+ * @create 2019-07-02
  */
 public class GameEntry {
 
@@ -20,7 +20,6 @@ public class GameEntry {
         score = s;
     }
 
-
     /**
      * Returns the name field
      */
@@ -28,14 +27,12 @@ public class GameEntry {
         return name;
     }
 
-
     /**
      * Return the score field
      */
     public int getScore() {
         return score;
     }
-
 
     @Override
     public String toString() {

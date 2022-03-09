@@ -14,7 +14,7 @@ package com.yufeng.data.structure.array.applications;
  *            1   4    6   4   1
  *          1   5   10   10   5   1
  *  @author yufeng
- * @create 2020-01-21
+ * @create 2019-07-02
  */
 public class PascalTriangle {
 
@@ -30,7 +30,6 @@ public class PascalTriangle {
         }
         return pt;
     }
-
 
     public static void main(String[] args) {
         int[][] array = pascalTriangle(5);

@@ -4,7 +4,7 @@ package com.yufeng.data.structure.array.applications;
  * @description
  *     Class for storing high scores in an array in nondecreasing order
  * @author yufeng
- * @create
+ * @create 2019-07-02
  */
 public class Scoreboard {
 
@@ -53,7 +53,6 @@ public class Scoreboard {
         numEntries --;
         return temp;                                    // return the removed object
     }
-
 
     public static void main(String[] args) {
         GameEntry gameEntry01 = new GameEntry("Mike", 1105);
