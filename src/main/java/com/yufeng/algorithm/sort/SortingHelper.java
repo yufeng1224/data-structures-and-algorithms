@@ -52,6 +52,18 @@ public class SortingHelper {
             HeapSort.sort(arr);
         } else if (sortName.equals("HeapSort2")) {
             HeapSort.sort2(arr);
+        } else if (sortName.equals("BubbleSort")) {
+            BubbleSort.sort(arr);
+        } else if (sortName.equals("BubbleSort2")) {
+            BubbleSort.sort2(arr);
+        } else if (sortName.equals("BubbleSort3")) {
+            BubbleSort.sort3(arr);
+        } else if (sortName.equals("ShellSort")) {
+            ShellSort.sort(arr);
+        } else if (sortName.equals("ShellSort2")) {
+            ShellSort.sort2(arr);
+        } else if (sortName.equals("ShellSort3")) {
+            ShellSort.sort3(arr);
         }
 
         long endTime = System.nanoTime();

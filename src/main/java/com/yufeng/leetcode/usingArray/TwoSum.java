@@ -2,7 +2,7 @@ package com.yufeng.leetcode.usingArray;
 
 /**
  * @description
- *      leetcode 283
+ *      leetcode
  * @author yufeng
  * @create 2019-09-03
  */
