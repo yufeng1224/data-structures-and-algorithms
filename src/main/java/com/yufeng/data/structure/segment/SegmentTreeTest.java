@@ -1,12 +1,11 @@
-package com.yufeng.data.structure.segment.test;
+package com.yufeng.data.structure.segment;
 
-import com.yufeng.data.structure.segment.SegmentTree;
 
 /**
- * 描述:
+ * @description
  *      线段树测试类
  * @author yufeng
- * @create 2019-08-21
+ * @create 2019-07-25
  */
 public class SegmentTreeTest {
 
@@ -15,18 +14,18 @@ public class SegmentTreeTest {
         test2();
     }
 
-
     public static void test1() {
         Integer[] nums = {-2, 0, 3, -5, 2, -1};
         SegmentTree<Integer> segmentTree = new SegmentTree<>(nums, (a, b) -> a + b);
         System.out.println(segmentTree.toString());
     }
 
-
     public static void test2() {
-        Integer[] nums = {-2, 0, 3, -5, 2, -1, 10};
+        Integer[] nums = {-2, 0, 3, -5, 2, -1};
         SegmentTree<Integer> segmentTree = new SegmentTree<>(nums, (a, b) -> a + b);
-        System.out.println(segmentTree.query(0, 2));
+        System.out.println(segmentTree.query(0, 2));            // 1
+        System.out.println(segmentTree.query(2, 5));            // -1
+        System.out.println(segmentTree.query(0, 5));            // -3
     }
 
 }

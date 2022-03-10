@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.segment;
 
 /**
- * 描述:
+ * @description
  *     融合器
  * @author yufeng
- * @create 2019-08-20
+ * @create 2019-07-25
  */
 public interface Merger<E> {
 
