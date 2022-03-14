@@ -3,62 +3,49 @@ package com.yufeng.data.structure.unionFind.impl;
 import com.yufeng.data.structure.unionFind.UF;
 
 /**
- * 描述:
- *     路径压缩
+ * @description
+ *     Union-Find第五版: 路径压缩
  * @author yufeng
- * @create 2019-08-26
+ * @create 2019-07-31
  */
 public class UnionFind5 implements UF {
 
-    private int[] parent;           // 底层维护了一个数组
+    private int[] parent;
 
-    private int[] rank;             // rank[i]表示以i为根的集合所表示的数的层数
+    private int[] rank;                 // rank[i]表示以i为根的集合所表示的数的层数
 
     public UnionFind5(int size) {
         parent = new int[size];
         rank = new int[size];
         for (int i = 0; i < parent.length; i ++) {
             parent[i] = i;
-            rank[i] = 1;            // 初始化每个元素只有自己一层
+            rank[i] = 1;                // 初始化每个元素只有自己一层
         }
     }
-
 
     @Override
     public int getSize() {
         return parent.length;
     }
 
-
-    /**
-     * 查找过程, 查找元素p所对应的集合编号
-     * 时间复杂度: O(h), h为树的高度
-     */
     private int find(int p) {
         if (p < 0 && p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
-        while (p != parent[p]) {                // 当p没有指向自己, 说明不是根节点
-            parent[p] = parent[parent[p]];      // 路径压缩(只加了一行代码)
+
+        /** 路径压缩 */
+        while (p != parent[p]) {
+            parent[p] = parent[parent[p]];
             p = parent[p];
         }
-        return p;                               // 返回根节点
+        return p;
     }
 
-
-    /**
-     * 查看元素p和元素q是否所属一个集合(和第一版类似)
-     */
     @Override
     public boolean isConnected(int p, int q) {
         return find(p) == find(q);
     }
 
-
-    /**
-     * 合并元素p 和 元素q所属的集合
-     * 时间复杂度: O(h), h为树的高度
-     */
     @Override
     public void unionElements(int p, int q) {
 
@@ -66,21 +53,16 @@ public class UnionFind5 implements UF {
         int qRoot = find(q);
 
         if (pRoot == qRoot) {
-            return;                             // 元素p和元素q已经属于同一集合, 无需合并直接返回
+            return;
         }
 
-        /**
-         * 根据两个元素所在树的rank的不同判断合并方向
-         * 将rank低的集合合并到rank高的集合上
-         * 目的: 降低树的深度
-         */
-        if (rank[pRoot] < rank[qRoot]) {
-            parent[pRoot] = qRoot;              // pRoot树的高度浅, pRoot指向qRoot
-        } else if (rank[qRoot] < rank[pRoot]) {
-            parent[qRoot] = pRoot;
-        } else {    // rank[qRoot] = rank[pRoot]
+        if (rank[qRoot] == rank[pRoot]) {
             parent[pRoot] = qRoot;
-            rank[qRoot] ++;                     // rank数组需要进行维护!
+            rank[qRoot] ++;                         // rank数组需要进行维护
+        } else if (rank[pRoot] < rank[qRoot]) {
+            parent[pRoot] = qRoot;                  // pRoot树的高度浅, pRoot指向qRoot
+        } else {    // (rank[pRoot] > rank[qRoot])
+            parent[qRoot] = pRoot;
         }
     }
 

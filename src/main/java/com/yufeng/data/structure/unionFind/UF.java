@@ -1,10 +1,10 @@
 package com.yufeng.data.structure.unionFind;
 
 /**
- * 描述:
+ * @description
  *    并查集接口(不考虑向并查集中添加或删除一个元素)
  * @author yufeng
- * @create 2019-08-23
+ * @create 2019-07-30
  */
 public interface UF {
 
@@ -22,6 +22,5 @@ public interface UF {
      * 合并操作(Union): 将两个元素并在一起
      */
     void unionElements(int p , int q);
-
 
 }

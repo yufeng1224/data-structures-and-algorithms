@@ -1,15 +1,14 @@
-package com.yufeng.data.structure.unionFind.test;
+package com.yufeng.data.structure.unionFind;
 
-import com.yufeng.data.structure.unionFind.UF;
 import com.yufeng.data.structure.unionFind.impl.*;
 
 import java.util.Random;
 
 /**
- * 描述:
+ * @description
  *      并查集性能测试
  * @author yufeng
- * @create 2019-04-28
+ * @create 2019-07-30
  */
 public class UnionFindTest {
 
@@ -22,13 +21,12 @@ public class UnionFindTest {
         unionFindTest06();
     }
 
-
     /**
      * 1W级别
      *    1. UnionFind1 : 0.136846621 s
      *    2. UnionFind2 : 0.052098946 s
      */
-    private static  void unionFindTest01() {
+    private static void unionFindTest01() {
         int size = 10000;
         int m = 10000;
 
@@ -38,7 +36,6 @@ public class UnionFindTest {
         UnionFind2 uf2 = new UnionFind2(size);
         System.out.println("UnionFind2 : " + testUF(uf2, m) +  " s");
     }
-
 
     /**
      * 10W级别(虽然测试不太严谨, 但是性能差距还是比较明显!)
@@ -56,14 +53,11 @@ public class UnionFindTest {
         System.out.println("UnionFind2 : " + testUF(uf2, m) +  " s");
     }
 
-
     /**
      * 10W级别及10W次操作
      *    1. UnionFind1 : 5.939111996 s
-     *
      *    2. UnionFind2 : 11.335737645 s
      *       极端情况下,生成的树退化成一个链表, 导致速度变得很慢!
-     *
      *    3. UnionFind3 : 0.020849999 s
      *       可以保证树的深度是比较浅的
      */
@@ -81,7 +75,6 @@ public class UnionFindTest {
         System.out.println("UnionFind3 : " + testUF(uf3, m) +  " s");
     }
 
-
     /**
      * 千万级别
      *    1. UnionFind3 : 5.019416229 s
@@ -97,7 +90,6 @@ public class UnionFindTest {
         UnionFind4 uf4 = new UnionFind4(size);
         System.out.println("UnionFind4 : " + testUF(uf4, m) +  " s");
     }
-
 
     /**
      * 千万级别
@@ -120,15 +112,11 @@ public class UnionFindTest {
 
     }
 
-
     /**
      * 千万级别
      *    1. UnionFind3 : 6.065878791 s
-     *
      *    2. UnionFind4 : 5.263593504 s
-     *
      *    3. UnionFind5 : 4.066775615 s
-     *
      *    4. UnionFind6 : 5.089887368 s
      *       (递归压缩的性能要比非递归压缩的性能差)
      */
@@ -147,9 +135,7 @@ public class UnionFindTest {
 
         UnionFind3 uf3 = new UnionFind3(size);
         System.out.println("UnionFind3 : " + testUF(uf3, m) +  " s");
-
     }
-
 
     /** 测试并查集的性能 */
     private static double testUF(UF uf, int m) {

@@ -3,14 +3,14 @@ package com.yufeng.data.structure.unionFind.impl;
 import com.yufeng.data.structure.unionFind.UF;
 
 /**
- * 描述:
- *      第二版的Union-Find(Quick Union设计思路)
+ * @description
+ *      Union-Find第二版: Quick Union设计思路
  * @author yufeng
- * @create 2019-08-24
+ * @create 2019-07-30
  */
 public class UnionFind2 implements UF {
 
-    private int[] parent;           // 底层维护了一个数组
+    private int[] parent;               // 底层维护了一个数组
 
     public UnionFind2(int size) {
         parent = new int[size];
@@ -19,27 +19,26 @@ public class UnionFind2 implements UF {
         }
     }
 
-
     @Override
     public int getSize() {
         return parent.length;
     }
 
-
     /**
      * 查找过程, 查找元素p所对应的集合编号
-     * 时间复杂度: O(h), h为树的高度
+     * 时间复杂度: O(h), h为p节点所在树的高度
      */
     private int find(int p) {
         if (p < 0 && p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
-        while (p != parent[p]) {        // 当p没有指向自己, 说明不是根节点
-            p = parent[p];              // 寻找它的父亲节点
-        }
-        return p;                       // 返回根节点
-    }
 
+        /** 当p没有指向自己, 说明不是根节点, 寻找它的父亲节点 */
+        while (p != parent[p]) {
+            p = parent[p];
+        }
+        return p;
+    }
 
     /**
      * 查看元素p和元素q是否所属一个集合(和第一版类似)
@@ -48,7 +47,6 @@ public class UnionFind2 implements UF {
     public boolean isConnected(int p, int q) {
         return find(p) == find(q);
     }
-
 
     /**
      * 合并元素p 和 元素q所属的集合
