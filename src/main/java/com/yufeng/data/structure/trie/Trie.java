@@ -3,10 +3,10 @@ package com.yufeng.data.structure.trie;
 import java.util.TreeMap;
 
 /**
- * 描述:
+ * @description
  *      字典树
  * @author yufeng
- * @create 2019-08-22
+ * @create 2019-07-27
  */
 public class Trie {
 
@@ -35,37 +35,33 @@ public class Trie {
         size = 0;
     }
 
-
     /**
-     * 获得字典树中存储的单词数量
+     * 获得Trie中存储的单词数量
      */
     public int getSize() {
         return size;
     }
 
-
     /**
-     * 向字典树中添加一个新的单词(添加元素的逻辑跟二叉树类似)
-     * 练习题: 添加元素逻辑的递归写法?
+     * 向Tire中添加一个新的单词word
      */
     public void add(String word) {
         Node cur = root;
         for (int i = 0; i < word.length(); i ++) {
-            char c = word.charAt(i);
+            char c = word.charAt(i);                // c作为一个节点插入整个字符中
             if (cur.next.get(c) == null) {
                 cur.next.put(c, new Node());        // 在map中添加一个新的key-value, key=c, value=new Node();
             }
             cur = cur.next.get(c);                  // 在当前节点的map中查找key=c的节点, cur指向新的查询出来的节点
         }
-        if (!cur.isWord) {                          // 不会重复添加(类似集合)
+        if (!cur.isWord) {                          // 防止重复添加
             cur.isWord = true;
             size ++;
         }
     }
 
-
     /**
-     * 查询单词是否在字典树中(循环遍历)
+     * 查询单词是否在Trie中
      */
     public boolean contains(String word) {
         Node cur = root;
@@ -78,7 +74,6 @@ public class Trie {
         }
         return cur.isWord;
     }
-
 
     /**
      * 查询在字典树中是否有单词以prefix为前缀
@@ -96,7 +91,6 @@ public class Trie {
         }
         return true;
     }
-
 
 //    public boolean isPrefix(String prefix) {
 //        Node cur = root;
