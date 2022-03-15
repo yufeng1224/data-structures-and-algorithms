@@ -19,17 +19,12 @@ public class UnionFind2 implements UF {
         }
     }
 
-    @Override
-    public int getSize() {
-        return parent.length;
-    }
-
     /**
-     * 查找过程, 查找元素p所对应的集合编号
+     * 查找元素p所对应的集合编号
      * 时间复杂度: O(h), h为p节点所在树的高度
      */
     private int find(int p) {
-        if (p < 0 && p >= parent.length) {
+        if (p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
 
@@ -40,16 +35,18 @@ public class UnionFind2 implements UF {
         return p;
     }
 
-    /**
-     * 查看元素p和元素q是否所属一个集合(和第一版类似)
-     */
+    @Override
+    public int getSize() {
+        return parent.length;
+    }
+
     @Override
     public boolean isConnected(int p, int q) {
         return find(p) == find(q);
     }
 
     /**
-     * 合并元素p 和 元素q所属的集合
+     * 合并元素p和元素q所属的集合
      * 时间复杂度: O(h), h为树的高度
      */
     @Override

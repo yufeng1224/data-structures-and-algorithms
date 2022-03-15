@@ -19,25 +19,23 @@ public class UnionFind1 implements UF {
         }
     }
 
-    @Override
-    public int getSize() {
-        return id.length;
-    }
-
-    /** 私有辅助函数 */
     /**
-     * 查找元素p所对应的集合编号
-     * 时间复杂度: O(1)
+     * 私有辅助函数: 查找元素p所对应的集合编号
      */
     private int find(int p) {
-        if (p < 0 && p >= id.length) {
+        if (p < 0 || p >= id.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
         return id[p];
     }
 
+    @Override
+    public int getSize() {
+        return id.length;
+    }
+
     /**
-     * 查看元素p和元素q是否所属同一个集合
+     * 查询操作: 查看元素p和元素q是否所属同一个集合
      */
     @Override
     public boolean isConnected(int p, int q) {
@@ -45,8 +43,7 @@ public class UnionFind1 implements UF {
     }
 
     /**
-     * 合并元素p和元素q所在的集合
-     * 时间复杂度: O(n)
+     * 合并操作: 合并元素p和元素q所在的集合
      */
     @Override
     public void unionElements(int p, int q) {

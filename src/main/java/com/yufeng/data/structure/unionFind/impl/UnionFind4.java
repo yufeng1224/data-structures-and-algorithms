@@ -12,7 +12,7 @@ public class UnionFind4 implements UF {
 
     private int[] parent;
 
-    private int[] rank;                 // rank[i]表示以i为根的集合所表示的数的层数
+    private int[] rank;                 // rank[i]表示以i为根的集合所表示的层数
 
     public UnionFind4(int size) {
         parent = new int[size];
@@ -23,19 +23,19 @@ public class UnionFind4 implements UF {
         }
     }
 
-    @Override
-    public int getSize() {
-        return parent.length;
-    }
-
     private int find(int p) {
-        if (p < 0 && p >= parent.length) {
+        if (p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
         while (p != parent[p]) {
             p = parent[p];
         }
         return p;
+    }
+
+    @Override
+    public int getSize() {
+        return parent.length;
     }
 
     /**
@@ -60,9 +60,9 @@ public class UnionFind4 implements UF {
         }
 
         /**
-         * 根据两个元素所在树的rank的不同判断合并方向
-         * 将rank低的集合合并到rank高的集合上
-         * 目的: 降低树的深度
+         * 1. 根据两个元素所在树的rank的不同判断合并方向
+         * 2. 将rank低的集合合并到rank高的集合上
+         * 3. 目的: 降低树的深度
          */
         if (rank[pRoot] < rank[qRoot]) {
             parent[pRoot] = qRoot;          // pRoot树的高度浅, pRoot指向qRoot

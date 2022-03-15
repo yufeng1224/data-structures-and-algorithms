@@ -9,7 +9,7 @@ package com.yufeng.data.structure.unionFind;
 public interface UF {
 
     /**
-     * 返回并查集一共考虑多少个元素
+     * 返回并查集中的元素个数
      */
     int getSize();
 

@@ -12,7 +12,7 @@ public class UnionFind5 implements UF {
 
     private int[] parent;
 
-    private int[] rank;                 // rank[i]表示以i为根的集合所表示的数的层数
+    private int[] rank;                 // rank[i]表示以i为根的集合所表示的元素的层数
 
     public UnionFind5(int size) {
         parent = new int[size];
@@ -23,13 +23,8 @@ public class UnionFind5 implements UF {
         }
     }
 
-    @Override
-    public int getSize() {
-        return parent.length;
-    }
-
     private int find(int p) {
-        if (p < 0 && p >= parent.length) {
+        if (p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
 
@@ -39,6 +34,11 @@ public class UnionFind5 implements UF {
             p = parent[p];
         }
         return p;
+    }
+
+    @Override
+    public int getSize() {
+        return parent.length;
     }
 
     @Override

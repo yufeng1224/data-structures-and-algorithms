@@ -23,22 +23,22 @@ public class UnionFind6 implements UF {
         }
     }
 
-    @Override
-    public int getSize() {
-        return parent.length;
-    }
-
     /**
      * 递归寻找根节点
      */
     private int find(int p) {
-        if (p < 0 && p >= parent.length) {
+        if (p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound");
         }
         if (p != parent[p]) {
             parent[p] = find(parent[p]);
         }
         return parent[p];                       // 返回根节点
+    }
+
+    @Override
+    public int getSize() {
+        return parent.length;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class UnionFind6 implements UF {
             parent[qRoot] = pRoot;
         } else {    // rank[qRoot] = rank[pRoot]
             parent[pRoot] = qRoot;
-            rank[qRoot] ++;                     // rank数组需要进行维护!
+            rank[qRoot] ++;                     // rank数组维护
         }
     }
 }
