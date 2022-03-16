@@ -3,17 +3,16 @@ package com.yufeng.data.structure.AVLTree;
 import java.util.ArrayList;
 
 /**
- * 描述:
+ * @description
  *      自定义平衡二叉树
  * @author yufeng
- * @create 2019-08-28
+ * @create 2019-08-02
  */
 public class AVLTree<K extends Comparable<K>, V> {
 
     private class Node {
 
         public K key;
-
         public V value;
 
         public Node left, right;
@@ -38,7 +37,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         size = 0;
     }
 
-
     /**
      * 获取元素的数量
      */
@@ -46,83 +44,12 @@ public class AVLTree<K extends Comparable<K>, V> {
         return size;
     }
 
-
     /**
      * 判断树是否为空
      */
     public boolean isEmpty() {
         return size == 0;
     }
-
-
-    /** 辅助函数 */
-    /**
-     * 判断该二叉树是否是一颗二分搜索树
-     */
-    public boolean isBST() {
-        ArrayList<K> keys = new ArrayList<>();
-        inOrder(root, keys);
-
-        for (int i = 1; i < keys.size(); i ++) {
-            if (keys.get(i - 1).compareTo(keys.get(i)) > 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    /**
-     * 中序遍历
-     */
-    private void inOrder(Node node, ArrayList<K> keys) {
-        if (node == null) {
-            return;
-        }
-
-        inOrder(node.left, keys);
-        keys.add(node.key);
-        inOrder(node.right, keys);
-    }
-
-
-    /** 辅助函数 */
-    /**
-     * 判断该二叉树是否是一颗平衡二叉树
-     */
-    public boolean isBalanced() {
-        return isBalanced(root);
-    }
-
-
-    /**
-     * 判断以Node为根的二叉树是否是一颗平衡二叉树,递归算法
-     */
-    private boolean isBalanced(Node node) {
-        if (node == null) {
-            return true;
-        }
-
-        int balanceFactor = getBalanceFactor(node);
-        if (Math.abs(balanceFactor) > 1) {
-            return false;
-        }
-
-        // System.out.print(node.key + " ");
-        return isBalanced(node.left) && isBalanced(node.right);     // 深度优先遍历
-    }
-
-
-    /**
-     * 获得节点的平衡因子(左右子树高度的差)
-     */
-    private int getBalanceFactor(Node node) {
-        if (node == null) {
-            return 0;
-        }
-        return getHeight(node.left) - getHeight(node.right);
-    }
-
 
     /**
      * 获得节点的高度
@@ -134,20 +61,73 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node.height;
     }
 
+    /**
+     * 获得节点的平衡因子(左右子树高度的差)
+     */
+    private int getBalanceFactor(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return getHeight(node.left) - getHeight(node.right);
+    }
 
     /**
-     * 向AVL树中添加新的元素(key, value)
+     * 辅助函数一: 判断该二叉树是否是一颗二分搜索树
+     */
+    public boolean isBST() {
+        ArrayList<K> keys = new ArrayList<>();
+        inOrder(root, keys);                        // 中序遍历
+
+        for (int i = 1; i < keys.size(); i ++) {
+            if (keys.get(i - 1).compareTo(keys.get(i)) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void inOrder(Node node, ArrayList<K> keys) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left, keys);
+        keys.add(node.key);
+        inOrder(node.right, keys);
+    }
+
+    /**
+     * 辅助函数二: 判断该二叉树是否是一颗平衡二叉树
+     */
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+
+        int balanceFactor = getBalanceFactor(node);
+        if (Math.abs(balanceFactor) > 1) {
+            return false;
+        }
+
+        return isBalanced(node.left) && isBalanced(node.right);     // 深度优先遍历
+    }
+
+    /**
+     * 向AVL树中添加新的元素
      */
     public void add(K key, V value) {
         root = add(root, key, value);
     }
 
-
     /**
-     * 向以node为根的AVL中插入元素(key, value), 递归算法
-     * 返回插入新节点后AVL树的根
+     * 向以node为根的AVL树中插入元素, 返回插入新节点后AVL树的根
      */
     private Node add(Node node, K key, V value) {
+
         if (node == null) {
             size ++;
             return new Node(key, value);
@@ -157,35 +137,32 @@ public class AVLTree<K extends Comparable<K>, V> {
             node.value = value;
         } else if (key.compareTo(node.key) < 0) {
             node.left = add(node.left, key, value);
-        } else {    // key.compareTo(node.key) > 0
+        } else {
             node.right = add(node.right, key, value);
         }
 
-        // 更新height
+        /** 节点添加完毕, 更新height并计算平衡因子 */
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
-        // 计算平衡因子
         int balanceFactor = getBalanceFactor(node);
-//        if (Math.abs(balanceFactor) > 1) {
-//            System.out.println("unbalanced : " + balanceFactor);
-//        }
 
         /** 维护平衡性 */
-        // LL不平衡, 进行右旋转
+        // LL不平衡: 进行右旋转
         if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
             return rightRotate(node);
         }
-        // RR不平衡, 进行左旋转
+
+        // RR不平衡: 进行左旋转
         if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
             return leftRotate(node);
         }
 
-        // LR不平衡(先进行左旋转, 再进行右旋转)
+        // LR不平衡: 先进行左旋转, 再进行右旋转
         if (balanceFactor > 1 && getBalanceFactor(node.left) < 0) {
             node.left = leftRotate(node.left);          // 转换成LL的情况
             return rightRotate(node);                   // 进行右旋转
         }
 
-        // RL不平衡(先进行右旋转, 再进行左旋转)
+        // RL不平衡: 先进行右旋转, 再进行左旋转
         if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
             node.right = rightRotate(node.right);       // 转换成RR的情况
             return leftRotate(node);                    // 进行左旋转
@@ -194,10 +171,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node;
     }
 
-
     /** 旋转辅助函数*/
     /**
      * 对节点y进行向左旋转操作, 返回旋转后的新节点x
+     * T1 < y < T2 < x < T3 < z < T4
      *           y                                    x
      *         /  \                                 /   \
      *       T1    x          向左旋转(y)           y     z
@@ -205,7 +182,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      *          T2   z                         T1  T2 T3  T4
      *              / \
      *            T3  T4
-     * T1 < y < T2 < x < T3 < z < T4
+     *
      */
     private Node leftRotate(Node y) {
         Node x = y.right;
@@ -222,9 +199,9 @@ public class AVLTree<K extends Comparable<K>, V> {
         return x;
     }
 
-
     /**
      * 对节点y进行向右旋转操作, 返回旋转后的新节点x
+     * T1 < z < T2 < x < T3 < y < T4
      *          y                                x
      *         / \                             /  \
      *        x   T4     向右旋转(y)           z     y
@@ -232,7 +209,6 @@ public class AVLTree<K extends Comparable<K>, V> {
      *     z   T3                          T1 T2 T3  T4
      *    / \
      *   T1  T2
-     *
      *
      * x的右子树需要进行重新的挂接操作, 左子树无需变动
      */
@@ -244,14 +220,12 @@ public class AVLTree<K extends Comparable<K>, V> {
         x.right = y;
         y.left = T3;
 
-        // 更新height
+        // 更新height: 必须先计算y, 在计算x
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
-        //x.height = Math.max(getHeight(x.left), y.height) + 1;
 
         return x;
     }
-
 
     /**
      * 返回以node为根节点的AVL树中, key所在的节点
@@ -270,17 +244,14 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
     }
 
-
     public boolean contains(K key) {
         return getNode(root, key) != null;
     }
-
 
     public V get(K key) {
         Node node = getNode(root, key);
         return node == null ? null : node.value;
     }
-
 
     public void set(K key, V newValue) {
         Node node = getNode(root, key);
@@ -289,7 +260,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         node.value = newValue;
     }
-
 
     /**
      * 返回以node为根的二分搜索树的最小值所在的节点
@@ -300,22 +270,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         return minimum(node.left);
     }
-
-
-    // 删除掉以node为根的二分搜索树中的最小节点
-    // 返回删除节点后的新的二分搜索树的根
-//    private Node removeMin(Node node) {
-//        if (node.left == null) {
-//            Node rightNode = node.right;
-//            node.right = null;
-//            size --;
-//            return rightNode;
-//        }
-//
-//        node.left = removeMin(node.left);
-//        return node;
-//    }
-
 
     /**
      * 从AVL树中删除键为key的节点
@@ -329,7 +283,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return null;
     }
 
-
     private Node remove(Node node, K key) {
         if (node == null) {
             return null;
@@ -342,9 +295,8 @@ public class AVLTree<K extends Comparable<K>, V> {
         } else if (key.compareTo(node.key) > 0) {
             node.right = remove(node.right, key);
             retNode = node;
-        } else {         // key.compareTo(node.key) == 0
-            // 待删除节点左子树为空的情况
-            if (node.left == null) {
+        } else {
+            if (node.left == null) {                // 待删除节点左子树为空的情况
                 Node rightNode = node.right;
                 node.right = null;
                 size --;
@@ -355,9 +307,11 @@ public class AVLTree<K extends Comparable<K>, V> {
                 size --;
                 retNode = leftNode;
             } else {
-                // 待删除节点左右子树均不为空的情况
-                // 找到比删除节点大的最小节点, 即带删除节点右子树的最小节点
-                // 用这个节点顶替删除节点的位置
+                /**
+                 * 待删除节点左右子树均不为空的情况
+                 *    1. 找到比删除节点大的最小节点, 即删除节点右子树的最小节点
+                 *    2. 用这个节点顶替删除节点的位置
+                 */
                 Node successor = minimum(node.right);
                 successor.right = remove(node.right, successor.key);
                 successor.left = node.left;
@@ -367,23 +321,22 @@ public class AVLTree<K extends Comparable<K>, V> {
             }
         }
 
-        // retNode 为null的情况, 平衡的维护问题就不需要考虑了
+        // retNode为null的情况, 平衡的维护问题就不需要考虑了
         if (retNode == null) {
             return null;
         }
 
-        // 更新height
+        /** 更新height, 计算平衡因子 */
         retNode.height = 1 + Math.max(getHeight(retNode.left), getHeight(retNode.right));
-        // 计算平衡因子
         int balanceFactor = getBalanceFactor(retNode);
 
         /** 维护平衡性 */
-        // LL不平衡, 进行右旋转
+        // LL不平衡
         if (balanceFactor > 1 && getBalanceFactor(retNode.left) >= 0) {
             return rightRotate(retNode);
         }
 
-        // RR不平衡, 进行左旋转
+        // RR不平衡
         if (balanceFactor < -1 && getBalanceFactor(retNode.right) <= 0) {
             return leftRotate(retNode);
         }
@@ -402,5 +355,4 @@ public class AVLTree<K extends Comparable<K>, V> {
 
         return retNode;
     }
-
 }

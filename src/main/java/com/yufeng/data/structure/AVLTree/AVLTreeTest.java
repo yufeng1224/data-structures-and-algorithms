@@ -1,31 +1,36 @@
-package com.yufeng.data.structure.AVLTree.test;
+package com.yufeng.data.structure.AVLTree;
 
-import com.yufeng.data.structure.AVLTree.AVLTree;
 import com.yufeng.data.structure.map.impl.BSTMap;
 import com.yufeng.data.structure.set.FileOperation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
- * 描述:
+ * @description
  *      AVLTree 测试类
  * @author yufeng
- * @create 2019-08-28
+ * @create 2019-08-03
  */
 public class AVLTreeTest {
 
     public static void main(String[] args) {
-        //avlTreeTest01();
-        //avlTreeTest02();
+        avlTreeTest01();
+        avlTreeTest02();
         avlTreeTest03();
     }
 
-
+    /**
+     * BSTMap和AVLTree性能比较
+     */
     private static void avlTreeTest01() {
         System.out.println("Pride and Prejudice");
         ArrayList<String> words = new ArrayList<>();
 
-        if(FileOperation.readFile("pride-and-prejudice.txt", words)) {
+        if (FileOperation.readFile("pride-and-prejudice.txt", words)) {
+
+            // BST极端情况下会退化成链表
+            //Collections.sort(words);
 
             //Test BST
             long startTime = System.nanoTime();
@@ -69,7 +74,6 @@ public class AVLTreeTest {
         }
     }
 
-
     private static void avlTreeTest02() {
         ArrayList<String> words = new ArrayList<>();
         if(FileOperation.readFile("pride-and-prejudice.txt", words)) {
@@ -83,14 +87,12 @@ public class AVLTreeTest {
                 }
             }
 
-
             System.out.println("Total different words: " + avlTree.getSize());
             System.out.println("Frequency of PRIDE: " + avlTree.get("pride"));
             System.out.println("Frequency of PREJUDICE: " + avlTree.get("prejudice"));
 
             System.out.println("is BSTMap : " + avlTree.isBST());
             System.out.println("is Balanced : " + avlTree.isBalanced());
-
 
             for (String word : words) {
                 avlTree.remove(word);
@@ -102,9 +104,7 @@ public class AVLTreeTest {
         System.out.println();
     }
 
-
     private static void avlTreeTest03() {
-
         AVLTree<Integer, Integer> avlTree = new AVLTree<>();
 
         avlTree.add(41, 41);
@@ -119,7 +119,6 @@ public class AVLTreeTest {
         avlTree.add(37, 37);
         avlTree.add(42, 42);
         avlTree.add(53, 53);
-
 
         System.out.println(avlTree.isBalanced());
     }
