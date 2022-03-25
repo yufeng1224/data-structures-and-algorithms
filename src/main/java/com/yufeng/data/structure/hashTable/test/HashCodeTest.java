@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * 描述:
- *      jdk中的hashCode
+ * @description
+ *      jdk中的hashCode演示
  * @author yufeng
- * @create 2019-09-10
+ * @create 2019-08-08
  */
 public class HashCodeTest {
 
@@ -25,12 +25,11 @@ public class HashCodeTest {
         String d = "imooc";
         System.out.println(d.hashCode());               // 100327135
 
-        Student student = new Student(3, 2, "bobo", "liu");
+        Student student = new Student(3, 2, "feng", "yu");
         System.out.println(student.hashCode());
 
-        Student student2 = new Student(3, 2, "BOBO", "liu");
+        Student student2 = new Student(3, 2, "FENG", "YU");
         System.out.println(student2.hashCode());
-
 
         // jdk中的hash应用
         HashSet<Student> set = new HashSet<>();
@@ -39,7 +38,7 @@ public class HashCodeTest {
         HashMap<Student, Integer> scores = new HashMap<>();
         scores.put(student, 100);
 
-        Student student3 = new Student(3, 2, "BOBO", "liu");
+        Student student3 = new Student(3, 2, "FENG", "yu");
         System.out.println(student3.hashCode());            // 注释掉 Student 中的hashCode, 根据每个对象的地址映射成整型
     }
 }

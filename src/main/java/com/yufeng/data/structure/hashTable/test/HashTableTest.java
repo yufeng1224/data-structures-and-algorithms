@@ -6,25 +6,20 @@ import com.yufeng.data.structure.set.FileOperation;
 import java.util.ArrayList;
 
 /**
- * 描述:
- *
+ * @description
+ *      HashTable测试
  * @author yufeng
- * @create 2021-05-11
+ * @create 2019-08-08
  */
 public class HashTableTest {
 
-    public static void main(String[] args) {
-        hashtableTest01();
-    }
-
-
-    private static void hashtableTest01() {
+    private void hashtableTest01() {
         System.out.println("Pride and Prejudice");
         ArrayList<String> words = new ArrayList<>();
 
-        if(FileOperation.readFile("pride-and-prejudice.txt", words)) {
+        if (FileOperation.readFile("pride-and-prejudice.txt", words)) {
 
-            //Test BST
+            //Test HashTable
             long startTime = System.nanoTime();
 
             HashTable<String, Integer> hashTable = new HashTable<>();
@@ -42,10 +37,12 @@ public class HashTableTest {
 
             long endTime = System.nanoTime();
             double time = (endTime - startTime) / 10000;
-            System.out.println("BST: " + time + " s");
+            System.out.println("HashTable: " + time + " s");
         }
     }
 
-
-
+    public static void main(String[] args) {
+        HashTableTest ht = new HashTableTest();
+        ht.hashtableTest01();
+    }
 }
