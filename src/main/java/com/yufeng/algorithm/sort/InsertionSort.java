@@ -20,7 +20,7 @@ public class InsertionSort {
      */
     public static <E extends Comparable<E>> void sort1(E[] arr) {
         for (int i = 0; i < arr.length; i ++) {
-            // 将arr[i]插入到合适的位置
+            /* 将arr[i]插入到合适的位置 */
             for (int j = i; j - 1 >= 0; j --) {
                 if (arr[j].compareTo(arr[j - 1]) < 0) {
                     swap(arr, j, j - 1);
@@ -48,7 +48,8 @@ public class InsertionSort {
             E temp = arr[i];
             int j;
             for (j = i; j - 1 >= 0 && temp.compareTo(arr[j - 1]) < 0; j --) {
-                arr[j] = arr[j - 1];            // 数据交换改为赋值操作
+                /* 数据交换改为赋值操作 */
+                arr[j] = arr[j - 1];
             }
             arr[j] = temp;
         }

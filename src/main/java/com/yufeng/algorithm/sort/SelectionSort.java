@@ -15,10 +15,12 @@ public class SelectionSort {
     /** 选择排序时间复杂度: O(n^2) */
     /**
      * 原地排序: 实现方式1
+     * 从前往后
      */
     public static <E extends Comparable<E>> void sort1(E[] arr) {
+        /* arr[0...i) 是有有序的; arr[i...n)是无序的 */
         for (int i = 0; i < arr.length; i ++) {
-            int minIndex = i;
+            int minIndex = i;                               // 选择arr[i...n)中最小值的索引
             for (int j = i; j < arr.length; j ++) {
                 if (arr[j].compareTo(arr[minIndex]) < 0) {
                     minIndex = j;
@@ -29,11 +31,12 @@ public class SelectionSort {
     }
 
     /**
-     * 原地排序: 实现方式2
+     * 原地排序2: 从后往前
      * 循环不变量: arr[i...n)已排序, arr[0...i)未排序
      */
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         for (int i = arr.length - 1; i >= 0; i --) {
+            /* 选择 arr[0...i]中的最大值 */
             int maxIndex = i;
             for (int j = i; j >= 0; j --) {
                 if (arr[j].compareTo(arr[maxIndex]) > 0) {
@@ -45,7 +48,7 @@ public class SelectionSort {
     }
 
     /**
-     * 原地排序: 实现方式3
+     * 原地排序3
      */
     public static <E extends Comparable<E>> void sort3(E[] arr) {
         for (int i = 0; i < arr.length - 1; i ++) {
