@@ -10,7 +10,7 @@ public class Deque<E> {
 
     private E[] data;
 
-    private int front, tail;
+    private int front, tail;                        // tail下标位置上是没有元素的。front==tail时, 队列是满的
 
     private int size;                               // 记录存储的元素数量
 
@@ -94,6 +94,8 @@ public class Deque<E> {
             throw new IllegalArgumentException("Can't dequeue from an empty queue");
         }
 
+        // tail 下标对应是没有元素的。 因此需要往前减去1。 计算删除掉队尾元素以后, 新的 tail 位置
+        tail = tail == 0 ? data.length - 1 : tail - 1;
         E ret = data[tail];
         data[tail] = null;
         size --;
