@@ -28,7 +28,7 @@ public class MergeSort {
         sort(arr, l, mid);
         sort(arr, mid + 1, r);
 
-        merge(arr, l, mid, r);                                          // 进行归并
+        merge(arr, l, mid, r);                                          // 归并操作
     }
 
     /** 归并排序算法优化(一) */
@@ -52,6 +52,30 @@ public class MergeSort {
          */
         if (arr[mid].compareTo(arr[mid + 1]) > 0) {
             merge(arr, l, mid, r);                                      // 进行归并
+        }
+    }
+
+    /** 合并两个有序的空间 arr[l, mid] 和 arr[mid + 1, r] */
+    public static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r) {
+        E[] temp = Arrays.copyOfRange(arr, l, r + 1);
+
+        int i = l, j = mid + 1;
+
+        // 每轮循环为 arr[k] 赋值, 偏移量为l
+        for (int k = l; k <= r; k ++) {
+            if (i > mid) {                          // 已走出左边有序数组的区间
+                arr[k] = temp[j - l];
+                j ++;
+            } else if (j > r) {                     // 已走出右边有序数组的区间
+                arr[k] = temp[i - l];
+                i ++;
+            } else if (temp[i - l].compareTo(temp[j - l]) <= 0) {
+                arr[k] = temp[i - l];               // 左边区间的元素比右边的更小, 将左区间的元素赋值到arr中
+                i ++;
+            } else {
+                arr[k] = temp[j - l];               // 右边区间的元素比左边的更小, 将右区间的元素赋值到arr中
+                j ++;
+            }
         }
     }
 
@@ -101,29 +125,6 @@ public class MergeSort {
     }
 
     /** 合并两个有序的空间 arr[l, mid] 和 arr[mid + 1, r] */
-    public static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r) {
-        E[] temp = Arrays.copyOfRange(arr, l, r + 1);
-
-        int i = l, j = mid + 1;
-
-        for (int k = l; k <= r; k ++) {
-            if (i > mid) {                          // 已走出左边有序数组的区间
-                arr[k] = temp[j - l];
-                j ++;
-            } else if (j > r) {                     // 已走出右边有序数组的区间
-                arr[k] = temp[i - l];
-                i ++;
-            } else if (temp[i - l].compareTo(temp[j - l]) <= 0) {
-                arr[k] = temp[i - l];               // 左边区间的元素比右边的更小, 将左区间的元素赋值到arr中
-                i ++;
-            } else {
-                arr[k] = temp[j - l];               // 右边区间的元素比左边的更小, 将右区间的元素赋值到arr中
-                j ++;
-            }
-        }
-    }
-
-    /** 合并两个有序的空间 arr[l, mid] 和 arr[mid + 1, r] */
     private static <E extends Comparable<E>> void merge2(E[] arr, int l, int mid, int r, E[] temp) {
         System.arraycopy(arr, l, temp, l, r - l + 1);
 
@@ -152,11 +153,12 @@ public class MergeSort {
         E[] temp = Arrays.copyOf(arr, arr.length);
         int n = arr.length;
 
-        /**
-         * 遍历合并的两个区间的起始位置 i
-         * 合并 [i, i + sz - 1] 和 [i + sz, i + sz + sz - 1]
-         */
+        // 遍历合并的区间长度
         for (int sz = 1; sz < n; sz += sz) {
+            /**
+             * 遍历合并的两个区间的起始位置 i
+             * 合并 [i, i + sz - 1] 和 [i + sz, Math.min(i + sz + sz - 1, n - 1)]
+             */
             for (int i = 0; i + sz < n; i += sz + sz) {
                 if (arr[i + sz - 1].compareTo(arr[i + sz]) > 0) {
                     merge2(arr, i, i + sz - 1, Math.min(i + sz + sz - 1, n - 1), temp);
