@@ -23,8 +23,7 @@ public class QuickSort {
      * 快速排序实现一
      *    1. 对于完全有序的数组, 当前算法有明显缺陷
      *    2. 时间复杂度会变成O(n^2), 递归深度为O(n)并出现栈溢出的错误
-     *    3. 假设数据量是100W, 有序的数组, 快速排序的递归深度变为100W,
-     *       而归并排序的递归深度也只有20
+     *    3. 假设数据量是100W, 有序的数组, 快速排序的递归深度变为100W, 而归并排序的递归深度也只有20
      *    4. 缺陷造成原因: 标定点划分后的数据区间不平均导致
      */
     private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
@@ -59,12 +58,14 @@ public class QuickSort {
         // arr[l+1...j] < v; arr[j+1...i] >= v
         int j = l;
         for (int i = l + 1; i <= r; i ++) {
+            // 当arr[i].compareTo(arr[l]) > 0, 什么都不用做, 直接i++ 即可
+
             if (arr[i].compareTo(arr[l]) < 0) {
                 j ++;
                 ArrayGenerator.swap(arr, i, j);
             }
         }
-        ArrayGenerator.swap(arr, l, j);
+        ArrayGenerator.swap(arr, l, j);                 // 最后将标定点放在正确的索引位置
         return j;
     }
 
@@ -87,7 +88,7 @@ public class QuickSort {
     }
 
     private static <E extends Comparable<E>> int partition2(E[] arr, int l, int r, Random random) {
-        /** 生成[l, r]之间的随机索引 */
+        /** 生成[l, r]之间的随机索引, 然后与arr[l]交换 */
         int p = random.nextInt(r - l + 1) + l;
         ArrayGenerator.swap(arr, l, p);
 
@@ -127,9 +128,15 @@ public class QuickSort {
                 j --;
             }
 
+            /**
+             * 上面循环结束, 存在2种可能:
+             *    1. i,j指向的元素不符合条件
+             *    2. 所有元素都遍历完了
+             */
             if (i >= j) {                       // i和j指向同一个元素, i=j说明该元素等于标定点
                 break;
             }
+
             ArrayGenerator.swap(arr, i, j);
             i ++;
             j --;
@@ -159,19 +166,19 @@ public class QuickSort {
         int lt = l, i = l + 1, gt = r + 1;
 
         while (i < gt) {
-            if (arr[i].compareTo(arr[l]) < 0) {
+            if (arr[i].compareTo(arr[l]) < 0) {         // 扩充小于v的空间
                 lt ++;
                 ArrayGenerator.swap(arr, i, lt);
                 i ++;
-            } else if (arr[i].compareTo(arr[l]) > 0) {
+            } else if (arr[i].compareTo(arr[l]) > 0) {  // 扩充大于v的空间。 注意: 交换元素后, i不能++, 因为是新元素!
                 gt --;
                 ArrayGenerator.swap(arr, i, gt);
-            } else {            // arr[i] == arr[l]
+            } else {                                    // arr[i] == arr[l], 相当于扩充等于v的空间
                 i ++;
             }
         }
         ArrayGenerator.swap(arr, l, lt);
-        /** arr[l, lt-1] < v, arr[lt, gt-1] == v, arr[gt, r] > v */
+        /** 最终的数组空间变成: arr[l, lt-1] < v, arr[lt, gt-1] == v, arr[gt, r] > v */
 
         sortThreeWays(arr, l, lt - 1, random);
         sortThreeWays(arr, gt, r, random);
@@ -221,8 +228,6 @@ public class QuickSort {
         throw new RuntimeException("Index k is Illegal. k = " + k);
     }
 
-
-
     public static void main(String[] args) {
         int n = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
@@ -230,8 +235,8 @@ public class QuickSort {
         /** 归并排序与快速排序比较 */
         Integer[] arr1 = Arrays.copyOf(arr, arr.length);
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
-        SortingHelper.sortTest("MergeSort", arr1);          // 0.497317 s
-        SortingHelper.sortTest("QuickSort", arr2);          // 0.701591 s
+        SortingHelper.sortTest("MergeSort", arr1);
+        SortingHelper.sortTest("QuickSort", arr2);
 
         /** 快速排序sort和使用插入排序优化的快速排序对比 */
         Integer[] arr3 = Arrays.copyOf(arr, arr.length);
