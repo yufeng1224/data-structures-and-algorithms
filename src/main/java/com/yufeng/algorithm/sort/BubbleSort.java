@@ -27,21 +27,24 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序的优化(一)
-     *    如果未排序的所有元素在此轮比较中都没有交换位置, 说明这些元素都已按从小到大排好序
-     *    再包括前面轮次中已排好序的元素, 整个数组已经排序好了。 无需再继续操作, 可以直接跳出
+     * 冒泡排序优化(一)
+     *    1. 如果未排序的所有元素在此轮比较中都没有交换位置, 说明这些元素都已按从小到大排好序
+     *    2. 包括前面轮次中已排好序的元素, 说明整个数组已经排序好了, 可以直接跳出
+     *    3. 插入排序算法也有类似性质
      */
     public static <E extends Comparable<E>> void sort2(E[] data) {
 
         for (int i = 0; i + 1 < data.length; i ++) {            // n - 1 轮循环
             boolean isSwapped = false;
-            /** arr[n-i, n) 已排好序, 通过冒泡在 arr[n-i-1] 位置上放合适的元素 */
+
             for (int j = 0; j < data.length - i - 1; j ++) {
                 if (data[j].compareTo(data[j + 1]) > 0) {
                     ArrayGenerator.swap(data, j, j + 1);
                     isSwapped = true;
                 }
             }
+
+            /** 此轮元素没有交换位置, 说明已经排好序 */
             if (!isSwapped) {
                 break;
             }
@@ -49,9 +52,9 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序继续优化(二)
-     *    如果未排序的所有元素在此轮比较中, j+1后面的元素都没有交换位置, 说明j+1索引后面位置的元素都已按从小到大排好序
-     *    在下一轮比较中, 只需要从data[0]遍历到data[j]进行比较即可
+     * 冒泡排序优化(二)
+     *    1. 如果未排序的所有元素在此轮比较中, j+1后面的元素都没有交换位置, 说明j+1索引后面位置的元素都已按从小到大排好序
+     *    2. 在下一轮比较中, 只需要从data[0]遍历到data[j]进行比较即可
      */
     public static <E extends Comparable<E>> void sort3(E[] data) {
 
@@ -64,10 +67,8 @@ public class BubbleSort {
                     lastSwappedIndex = j + 1;
                 }
             }
-//            if (lastSwappedIndex == 0) {
-//                break;
-//            }
 
+//            if (lastSwappedIndex == 0) break;
             i = data.length - lastSwappedIndex;
         }
     }
