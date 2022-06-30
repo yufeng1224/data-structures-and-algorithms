@@ -38,7 +38,7 @@ public class ShellSort {
     }
 
     /**
-     * 希尔排序内层循环代码简化
+     * 内层循环代码简化
      */
     public static <E extends Comparable<E>> void sort2(E[] data) {
         int h = data.length / 2;
@@ -65,7 +65,7 @@ public class ShellSort {
         int h = 1;
 
         while (h < data.length) {
-            h = h * 3 + 1;              // 1, 4, 13, 40...
+            h = h * 3 + 1;              // 步长序列计算: 1, 4, 13, 40...
         }
 
         while (h >= 1) {
@@ -84,40 +84,19 @@ public class ShellSort {
     }
 
     public static void main(String[] args) {
-        /** 排序性能比较: 希尔排序、插入排序、 归并排序*/
+        /** 排序性能比较: 希尔排序、插入排序、 归并排序 */
         int n = 100000;
 
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
         Integer[] arr3 = Arrays.copyOf(arr, arr.length);
+        Integer[] arr4 = Arrays.copyOf(arr, arr.length);
+        Integer[] arr5 = Arrays.copyOf(arr, arr.length);
 
         SortingHelper.sortTest("ShellSort", arr);
-        SortingHelper.sortTest("InsertionSort", arr2);
+        SortingHelper.sortTest("ShellSort2", arr4);
+        SortingHelper.sortTest("ShellSort3", arr5);
         SortingHelper.sortTest("MergeSort3", arr3);
+        SortingHelper.sortTest("InsertionSort", arr2);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
