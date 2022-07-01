@@ -109,14 +109,15 @@ public class SegmentTree<E> {
 
         /** 查询分为3种情况: 1. 全部在左区间; 2. 全部在右区间; 3. 部分在左区间, 部分在右区间, 此时需要将结果融合再返回 */
         if (queryL >= mid + 1) {
-            return query(rightTreeIndex, mid + 1, r, queryL, queryR);
+            return query(rightTreeIndex, mid + 1, r, queryL, queryR);       // 全部在右区间
         } else if (queryR <= mid) {
-            return query(leftTreeIndex, l, mid, queryL, queryR);
+            return query(leftTreeIndex, l, mid, queryL, queryR);              // 全部在左区间
         }
 
+        // 部分在左边区间、 部分在右边区间, 分开查询并将结果融合操作
         E leftResult = query(leftTreeIndex, l, mid, queryL, mid);
         E rightResult = query(rightTreeIndex, mid + 1, r, mid + 1, queryR);
-        return merger.merge(leftResult, rightResult);                               // 左边区间与右边区间结果 融合操作
+        return merger.merge(leftResult, rightResult);
     }
 
     /**

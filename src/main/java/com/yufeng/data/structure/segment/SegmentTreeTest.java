@@ -12,6 +12,7 @@ public class SegmentTreeTest {
     public static void main(String[] args) {
         test1();
         test2();
+        test3();
     }
 
     public static void test1() {
@@ -26,6 +27,12 @@ public class SegmentTreeTest {
         System.out.println(segmentTree.query(0, 2));            // 1
         System.out.println(segmentTree.query(2, 5));            // -1
         System.out.println(segmentTree.query(0, 5));            // -3
+    }
+
+    public static void test3() {
+        Integer[] nums = {1, 2, 3, 4};
+        SegmentTree<Integer> segmentTree = new SegmentTree<>(nums, (a, b) -> a + b);
+        System.out.println(segmentTree.toString());
     }
 
 }
