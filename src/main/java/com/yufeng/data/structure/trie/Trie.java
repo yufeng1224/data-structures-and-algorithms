@@ -1,5 +1,6 @@
 package com.yufeng.data.structure.trie;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 
 /**
@@ -25,6 +26,40 @@ public class Trie {
             next = new TreeMap<>();
         }
     }
+
+    /** 使用数组作为节点 */
+//    private class Node2 {
+//
+//        public boolean isWord;
+//
+//        public Node2[] next;                    // 使用数组
+//
+//        public Node2(boolean isWord){
+//            this.isWord = isWord;
+//            next = new Node2[26];               // 只需创建26个空间
+//        }
+//
+//        public Node2(){
+//            this(false);
+//        }
+//    }
+
+    /** 使用HashMap作为节点 */
+//    private class Node3{
+//
+//        public boolean isWord;
+//        // 这里使用 HashMap
+//        public HashMap<Character, Node3> next;
+//
+//        public Node3(boolean isWord){
+//            this.isWord = isWord;
+//            next = new HashMap<>();
+//        }
+//
+//        public Node3(){
+//            this(false);
+//        }
+//    }
 
     private Node root;      // 根节点
 
