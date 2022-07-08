@@ -128,8 +128,8 @@ public class HashTable<K, V> {
 
         int oldM = M;
         this.M = newM;
-        for (int i = 0; i < oldM; i ++) {           // 遍历需要用旧的oldM
-            for (K key : hashtable[i].keySet()) {   // 计算新的hash值, 需要使用新的newM
+        for (int i = 0; i < oldM; i ++) {                   // 遍历需要用旧的oldM
+            for (K key : hashtable[i].keySet()) {           // hash()函数中, 计算新的hash值, 需要使用newM
                 newHashTable[hash(key)].put(key, hashtable[i].get(key));
             }
         }
