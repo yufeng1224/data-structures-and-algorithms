@@ -54,12 +54,12 @@ public class QuickSort {
         sort2(arr, p + 1, r);
     }
 
+    /**
+     * partition分组: arr[l+1, j] < v; arr[j+1, i] >= v
+     */
     private static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
-        // arr[l+1...j] < v; arr[j+1...i] >= v
         int j = l;
         for (int i = l + 1; i <= r; i ++) {
-            // 当arr[i].compareTo(arr[l]) > 0, 什么都不用做, 直接i++ 即可
-
             if (arr[i].compareTo(arr[l]) < 0) {
                 j ++;
                 ArrayGenerator.swap(arr, i, j);
@@ -75,7 +75,9 @@ public class QuickSort {
     }
 
     /**
-     * 为快速排序添加随机化
+     * 实现一进阶
+     *    1. 为快速排序添加随机化
+     *    2. 还存在的缺陷: 假设数组中100W个元素都是相同的, 还是会退化成链表导致栈溢出错误
      */
     private static <E extends Comparable<E>> void sort3(E[] arr, int l, int r, Random random) {
         if (l >= r) {

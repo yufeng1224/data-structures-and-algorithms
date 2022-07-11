@@ -5,8 +5,6 @@ import com.yufeng.leetcode.util.ArrayGenerator;
 /**
  * @description
  *      1. 二分查找法代码演示
- *      2. 前提条件: 有序数列才能使用二分查找法
- *      3. 二分查找法思想在1946年提出, 第一个没有bug的二分查找法在1962年才出现
  * @author yufeng
  * @create 2019-09-03
  */
@@ -34,7 +32,6 @@ public class BinarySearch {
             return searchR(data, mid + 1, r, target);
         }
         return searchR(data, l, mid - 1, target);     // target在mid的左边
-
     }
 
     /**
@@ -51,11 +48,10 @@ public class BinarySearch {
                 return mid;
             }
 
-            // 调整区间
             if (data[mid].compareTo(target) < 0) {
-                l = mid + 1;                    // target在[mid+1, r]中, [l, mid]一定没有target
+                l = mid + 1;                            // target在[mid+1, r]中
             } else {
-                r = mid - 1;                    // target在[1, mid-1]中, [mid, r]一定没有target
+                r = mid - 1;                            // target在[1, mid-1]中
             }
         }
         return -1;
@@ -77,9 +73,9 @@ public class BinarySearch {
             }
 
             if (target.compareTo(data[mid]) > 0) {
-                l = mid + 1;                    // 在 data[mid+1, r) 范围里寻找target
+                l = mid + 1;                            // 在 data[mid+1, r) 范围里寻找target
             } else {
-                r = mid;                        // 在 data[1, mid)   范围里寻找target
+                r = mid;                                // 在 data[1, mid)   范围里寻找target
             }
         }
         return -1;
@@ -92,19 +88,18 @@ public class BinarySearch {
     public static <E extends Comparable<E>> int search3(E[] data, E target){
         int l = 0, r = data.length;
 
-        // 在 data[l, r] 中寻找解
-        while (l < r) {
+        while (l < r) {                                 // 在 data[l, r] 中寻找解
             int mid = l + (r - l) / 2;
 
             if (data[mid].compareTo(target) < 0) {
                 l = mid + 1;
-            } else {                                // data[mid] >= target
+            } else {                                    // data[mid] >= target
                 r = mid;
             }
         }
 
         /**
-         * 1. l合法性进行校验
+         * 1. L合法性进行校验
          * 2. 如果 data[l] == target，则返回 l; 否则返回 -1
          */
         if (l < data.length && data[l].compareTo(target) == 0) {
@@ -115,7 +110,7 @@ public class BinarySearch {
     }
 
     /**
-     * 返回 >target 元素中的的最小索引值
+     * 返回 >target 元素中的的最小值索引
      *    1. 如果数组中最小的元素都比target大, 则返回0
      *    2. 如果数组中最大的元素都比target小, 则没有元素符合题意, 返回data.length
      *    3. 因此搜索范围是 [0, data.length]
@@ -123,20 +118,20 @@ public class BinarySearch {
     public static <E extends Comparable<E>> int upper(E[] data, E target) {
         int l = 0, r = data.length;
 
-        while (l < r) {                        // 在data[l, r]中寻找解
+        while (l < r) {                                 // 在data[l, r]中寻找解, l==r时退出while循环
             int mid = l + (r - l) / 2;
 
             if (data[mid].compareTo(target) <= 0) {
                 l = mid + 1;
-            } else { // arr[mid] > target
+            } else {                                    // arr[mid] > target
                 r = mid;
             }
         }
-        return l;                               // l==r退出while循环, 所以此处也可return r
+        return l;
     }
 
     /**
-     * 返回 >=target 元素中的最大索引值
+     * ceil函数定义:
      *    1. 如果数组中存在元素等于target, 返回等于target元素中的最大索引值
      *    2. 如果数组中不存在元素等于target, 返回大于target元素中的最小索引值
      */
@@ -149,9 +144,9 @@ public class BinarySearch {
     }
 
     /**
-     * 返回 >=target 的最小值索引
-     *    1. 如果数组中存在元素等于target, 返回等于target元素中最小索引
-     *    2. 如果数组中不存在元素等于target, 返回大于target元素中的最小索引
+     * lowerCeil函数定义: >= target的最小索引值
+     *    1. 如果数组中存在元素等于target, 返回等于target元素中最小索引值
+     *    2. 如果数组中不存在元素等于target, 返回大于target元素中的最小索引值
      */
     public static <E extends Comparable<E>> int lowerCeil(E[] data, E target) {
         int u = upper(data, target);
@@ -222,8 +217,8 @@ public class BinarySearch {
     }
 
     /**
-     * 1. < target, 返回最大值索引
-     * 2. == target, 返回最大索引
+     * 1. 如果数组中不存在元素等于target, 返回小于target元素中的最大索引值
+     * 2. 如果数组中存在元素等于target, 返回等于target元素中的最大索引值
      */
     public static <E extends Comparable<E>> int upperFloor(E[] data, E target){
         int l = -1, r = data.length - 1;

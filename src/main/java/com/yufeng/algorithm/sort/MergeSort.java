@@ -188,6 +188,56 @@ public class MergeSort {
         }
     }
 
+    // 自顶向下的归并排序
+    public static <E extends Comparable<E>> void sort5(E[] arr) {
+        E[] temp = Arrays.copyOf(arr, arr.length);
+        sort5(arr, 0, arr.length, temp);
+    }
+
+    // 对 arr[l, r) 范围进行排序
+    private static <E extends Comparable<E>> void sort5(E[] arr, int l, int r, E[] temp) {
+        // 原来:if (l >= r)
+        // 现在，因为 r 是开区间，所以 r 比 l 多 1 的时候，整个数组中只有一个元素
+        if (r - l <= 1) {
+            return;
+        }
+
+        int mid = l + (r - l) / 2;
+
+
+        // 注意:这句没有变化，但是现在它的语义是对 arr[l, mid) 进行排序
+        sort5(arr, l, mid, temp);
+
+        // 原来: sort(arr, mid + 1, r, temp)
+        // 现在, 右侧区间的左边界变成了 mid
+        // 右边界虽然还是r, 但现在是开区间了
+        sort5(arr, mid, r, temp);
+
+        if (arr[mid - 1].compareTo(arr[mid]) > 0) {
+            merge(arr, l, mid, r, temp);
+        }
+    }
+
+    // 合并 arr[l, mid) 和 arr[mid, r) 两个区间的元素
+    private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r, E[] aux){
+        System.arraycopy(arr, l, aux, l, r - l);
+
+        int i = l, j = mid;
+        // 每轮循环为 arr[k] 赋值
+        for (int k = l; k < r; k ++){
+            if(i >= mid){
+                arr[k] = aux[j]; j ++;
+            } else if (j >= r) {
+                arr[k] = aux[i]; i ++;
+            } else if(aux[i].compareTo(aux[j]) <= 0){
+                arr[k] = aux[i];
+                i ++;
+            } else{
+                arr[k] = aux[j]; j ++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         /** 选择排序、插入排序、归并排序性能比较 */
         int n = 100000;

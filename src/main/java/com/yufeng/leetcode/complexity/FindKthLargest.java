@@ -18,10 +18,11 @@ public class FindKthLargest {
      */
     public static int findKthLargest(Integer[] nums, int k) {
         Random random = new Random();
-        return selectKByRecursion(nums, 0, nums.length, k, random);
+        return selectK(nums, 0, nums.length, nums.length - k, random);
     }
 
-    private static int selectKByRecursion(Integer[] arr, int l, int r, int k, Random random) {
+    // 在arr[l, r)中寻找第K小的元素
+    private static int selectK(Integer[] arr, int l, int r, int k, Random random) {
         int p = partition(arr, l, r, random);
 
         if (k == p) {
@@ -29,9 +30,9 @@ public class FindKthLargest {
         }
 
         if (k < p) {
-            return selectKByRecursion(arr, l, p, k, random);
+            return selectK(arr, l, p, k, random);
         }
-        return selectKByRecursion(arr, p + 1, r, k, random);
+        return selectK(arr, p + 1, r, k, random);
     }
 
     private static int findKthLargest2(Integer[] arr, int k) {
@@ -58,6 +59,7 @@ public class FindKthLargest {
         throw new RuntimeException("No solution!");
     }
 
+    // 在 arr[l, r) 进行 partition
     private static int partition(Integer[] arr, int l, int r, Random random) {
         // 生成[l, r)之间的随机索引
         int p = l + random.nextInt(r - l);
