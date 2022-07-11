@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class RBTreeTest {
 
     public static void main(String[] args) {
-        avlTreeTest01();
+        treeTest01();
     }
 
     /**
-     * BSTMap和AVLTree性能比较
+     * BSTMap、AVLTree、RBTree 性能比较
      */
-    private static void avlTreeTest01() {
+    private static void treeTest01() {
         System.out.println("Pride and Prejudice");
         ArrayList<String> words = new ArrayList<>();
 
@@ -64,7 +64,6 @@ public class RBTreeTest {
             endTime = System.nanoTime();
             time = (endTime - startTime) / 1000000000.0;
             System.out.println("RBTree: " + time + " s");
-
 
             startTime = System.nanoTime();
             AVLTree<String, Integer> avlTree = new AVLTree<>();

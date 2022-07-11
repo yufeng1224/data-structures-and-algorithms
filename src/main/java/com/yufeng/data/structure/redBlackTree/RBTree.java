@@ -1,8 +1,5 @@
 package com.yufeng.data.structure.redBlackTree;
 
-import com.yufeng.data.structure.set.FileOperation;
-
-import java.util.ArrayList;
 
 /**
  * @description
@@ -55,7 +52,6 @@ public class RBTree<K extends Comparable<K>, V> {
      * 辅助函数: 判断节点node的颜色
      */
     private boolean isRed(Node node) {
-
         if (node == null) {
             return BLACK;               // 红黑树中, 空节点默认为黑色
         }
@@ -80,7 +76,8 @@ public class RBTree<K extends Comparable<K>, V> {
         // 左旋转
         node.right = x.left;
         x.left = node;
-        // 节点颜色维持
+
+        // 节点颜色维护
         x.color = node.color;
         node.color = RED;
 
@@ -104,6 +101,7 @@ public class RBTree<K extends Comparable<K>, V> {
         node.left = x.right;
         x.right = node;
 
+        // 节点颜色维护
         x.color = node.color;
         node.color = RED;
 
@@ -150,7 +148,7 @@ public class RBTree<K extends Comparable<K>, V> {
         /** 红黑树性质维护 */
         /**
          * 添加情况1:
-         *      37(黑)     添加元素37        37(黑)
+         *      37(黑)     添加元素42        37(黑)
          *    /        ————————————>      /    \
          *   T1                         T1      42(红)
          *
@@ -299,28 +297,4 @@ public class RBTree<K extends Comparable<K>, V> {
             return successor;
         }
     }
-
-    public static void main(String[] args){
-
-        System.out.println("Pride and Prejudice");
-
-        ArrayList<String> words = new ArrayList<>();
-        if(FileOperation.readFile("pride-and-prejudice.txt", words)) {
-            System.out.println("Total words: " + words.size());
-
-            RBTree<String, Integer> map = new RBTree<>();
-            for (String word : words) {
-                if (map.contains(word))
-                    map.set(word, map.get(word) + 1);
-                else
-                    map.add(word, 1);
-            }
-
-            System.out.println("Total different words: " + map.getSize());
-            System.out.println("Frequency of PRIDE: " + map.get("pride"));
-            System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
-        }
-        System.out.println();
-    }
-
 }
